@@ -1,0 +1,12 @@
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+}
+h1 {
+    border-left: 0.1em solid #000;
+    padding-left: 0.5em;
+}
+hr {
+    border: 0;
+    border-top: 1px solid #000;
+}
