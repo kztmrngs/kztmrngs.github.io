@@ -1,11 +1,26 @@
+:root {
+    --color-surface-light: #f8f8f8;
+    --color-surface-dark: #232323;
+    --color-border-light: #ccc;
+    --color-border-dark: #444;
+    --color-bg-dark: #2c2c2c;
+    --color-bg-light: #f3f3f3;
+    --color-primary: #007fff;
+    --color-divider-light: #000;
+    --color-divider-dark: #444;
+    --color-accent-light: #000;
+    --color-accent-dark: #f3f3f3;
+}
+
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    transition: all 0.2s ease-in-out;
 }
 body {
     font-family: sans-serif;
-    line-height: 1.6;
+    line-height: 1.9;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -13,49 +28,144 @@ body {
 main {
     flex: 1;
 }
-h1 {
-    border-left: 0.1em solid #000;
-    padding-left: 0.5em;
-    font-weight: 400;
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    margin: 0.25em 0;
 }
 hr {
     border: 0;
-    border-top: 1px solid #000;
+    border-top: 1px solid var(--color-divider-light);
+}
+p {
+    margin: 0;
 }
 header {
-    background-color: #f8f8f8;
-    border-bottom: 1px solid #ccc;
-    padding: 1em;
+    background-color: var(--color-surface-light);
+    border-bottom: 1px solid var(--color-border-light);
+    padding: 1rem;
+    display: flex;
 }
 main {
-    padding: 1em;
+    padding: 1rem;
 }
 footer {
     text-align: center;
-    padding: 1em 0;
-    background-color: #f8f8f8;
-    border-top: 1px solid #ccc;
+    padding: 1rem 0;
+    background-color: var(--color-surface-light);
+    border-top: 1px solid var(--color-border-light);
 }
 
-@media (prefers-color-scheme: dark) {
-    html, body {
-        background-color: #2c2c2c;
-        color: #f3f3f3;
-    }
-    header, footer {
-        background-color: #232323;
-        border-color: #444;
-    }
-    h1 {
-        border-left-color: #f3f3f3;
-    }
-    hr {
-        border-top-color: #444;
-    }
-    a {
-        color: #8ecfff;
-    }
-    main {
-        background-color: transparent;
-    }
+.title {
+    line-height: 1.2;
+    border-left: 0.1rem solid var(--color-accent-light);
+    padding: 0.5em;
+    margin: 0.5rem 0;
 }
+.title h1 {
+    font-weight: 400;
+    margin: 0;
+}
+
+.menu {
+    display: flex;
+    margin: auto 0;
+    margin-left: auto;
+    padding: 1rem;
+}
+
+/* data-theme属性による切替 */
+[data-theme="dark"] {
+    background-color: var(--color-bg-dark);
+    color: var(--color-bg-light);
+}
+[data-theme="dark"] header,
+[data-theme="dark"] footer {
+    background-color: var(--color-surface-dark);
+    border-color: var(--color-border-dark);
+}
+[data-theme="dark"] hr {
+    border-top-color: var(--color-divider-dark);
+}
+[data-theme="dark"] a {
+    color: var(--color-primary);
+}
+[data-theme="dark"] main {
+    background-color: transparent;
+}
+[data-theme="dark"] .title {
+    border-left-color: var(--color-accent-dark);
+}
+
+/* トグルボタンのスタイル（必要に応じて調整） */
+#theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.3em;
+    cursor: pointer;
+    transition: color 0.2s;
+    color: inherit;
+    outline: none;
+}
+#theme-toggle:focus {
+    outline: 2px solid var(--color-primary);
+}
+
+/* トグルスイッチのスタイル */
+.toggle-switch {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+.toggle-switch input[type="checkbox"] {
+    display: none;
+}
+.toggle-switch .slider {
+    width: 36px;
+    height: 20px;
+    background: var(--color-border-light);
+    border-radius: 999px;
+    position: relative;
+    transition: background 0.2s;
+    margin: 0 0.5em 0 0;
+    box-sizing: border-box;
+}
+.toggle-switch .slider::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 16px;
+    height: 16px;
+    background: var(--color-bg-light);
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+.toggle-switch input[type="checkbox"]:checked + .slider {
+    background: var(--color-primary);
+}
+.toggle-switch input[type="checkbox"]:checked + .slider::before {
+    transform: translateX(16px);
+}
+.toggle-switch .toggle-icon {
+    font-size: 1.2em;
+    transition: color 0.2s;
+    margin-left: 0.2em;
+}
+[data-theme="dark"] .toggle-switch .slider {
+    background: var(--color-border-dark);
+}
+[data-theme="dark"] .toggle-switch .slider::before {
+    background: var(--color-bg-dark);
+}
+[data-theme="dark"] .toggle-switch input[type="checkbox"]:checked + .slider {
+    background: var(--color-primary);
+}
+[data-theme="dark"] .toggle-switch .toggle-icon {
+    color: var(--color-accent-dark);
+}
+[data-theme="light"] .toggle-switch .toggle-icon {
+    color: var(--color-accent-light);
+}
+
+/* トグルスイッチのアイコン切替（JSで制御） */
