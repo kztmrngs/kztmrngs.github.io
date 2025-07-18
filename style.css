@@ -60,6 +60,7 @@ footer {
 }
 
 .title {
+    color: var(--color-accent-light);
     line-height: 1.2;
     border-left: 0.1rem solid var(--color-accent-light);
     padding: 0.5em;
