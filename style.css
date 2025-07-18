@@ -64,6 +64,7 @@ footer {
     border-left: 0.1rem solid var(--color-accent-light);
     padding: 0.5em;
     margin: 0.5rem 0;
+    text-decoration: none;
 }
 .title h1 {
     font-weight: 400;
