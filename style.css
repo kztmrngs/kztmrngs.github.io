@@ -39,6 +39,10 @@ hr {
 p {
     margin: 0;
 }
+img {
+    max-width: 100%;
+    height: auto;
+}
 header {
     background-color: var(--color-surface-light);
     border-bottom: 1px solid var(--color-border-light);
@@ -87,7 +91,7 @@ footer {
     border-top-color: var(--color-divider-dark);
 }
 [data-theme="dark"] a {
-    color: var(--color-primary);
+    color: var(--color-bg-light);
 }
 [data-theme="dark"] main {
     background-color: transparent;
@@ -96,7 +100,6 @@ footer {
     border-left-color: var(--color-accent-dark);
 }
 
-/* トグルボタンのスタイル（必要に応じて調整） */
 #theme-toggle {
     background: none;
     border: none;
@@ -110,7 +113,6 @@ footer {
     outline: 2px solid var(--color-primary);
 }
 
-/* トグルスイッチのスタイル */
 .toggle-switch {
     display: inline-flex;
     align-items: center;
@@ -168,4 +170,13 @@ footer {
     color: var(--color-accent-light);
 }
 
-/* トグルスイッチのアイコン切替（JSで制御） */
+@media (max-width: 500px) {
+    header {
+        flex-direction: column;
+    }
+    .menu {
+        margin: 0.5rem 0 0 0;
+        padding: 0;
+        margin-left: 0;
+    }
+}
