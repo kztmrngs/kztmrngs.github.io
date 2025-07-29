@@ -10,13 +10,28 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/style.css">
+        <link rel="stylesheet" type="text/css" href="./style.css">
         <script src="/script.js" defer></script>
+        <script src="./script.js" defer></script>
     </head>
     <body>
         <header id="header-placeholder"></header>
         <main>
-            <!--template-->
-            <p>template</p>
+            <h1 class="title">タイマー</h1>
+            <div id="timer-app">
+                <label>
+                    <span>分:</span>
+                    <input type="number" id="minutes-input" min="0" max="999" value="1" style="width:4em;">
+                </label>
+                <label>
+                    <span>秒:</span>
+                    <input type="number" id="seconds-input" min="0" max="59" value="0" style="width:4em;">
+                </label>
+                <button id="start-btn">開始</button>
+                <button id="stop-btn" disabled>停止</button>
+                <button id="reset-btn">リセット</button>
+                <div id="timer-display" style="font-size:2em; margin-top:1em;">01:00</div>
+            </div>
         </main>
         <footer id="footer-placeholder"></footer>
     </body>

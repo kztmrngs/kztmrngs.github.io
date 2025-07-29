@@ -10,6 +10,8 @@
     --color-divider-dark: #444;
     --color-accent-light: #000;
     --color-accent-dark: #f3f3f3;
+    --color-white: #fff;
+    --color-primary-dark: #005fcc;
 }
 
 html, body {
@@ -19,7 +21,7 @@ html, body {
     transition: all 0.2s ease-in-out;
 }
 body {
-    font-family: sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     line-height: 1.9;
     min-height: 100vh;
     display: flex;
@@ -29,7 +31,7 @@ main {
     flex: 1;
 }
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
+    font-weight: 500;
     margin: 0.25em 0;
 }
 hr {
@@ -42,6 +44,26 @@ p {
 img {
     max-width: 100%;
     height: auto;
+}
+a {
+    color: var(--color-primary);
+}
+button {
+    color: var(--color-accent-light);
+    background-color: var(--color-bg-light);
+    border: var(--color-border-light) 1px solid;
+    padding: 0.25rem 0.5rem;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+}
+button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    transform: scale(1.04);
+}
+button:active {
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
+    transform: scale(0.97);
 }
 header {
     background-color: var(--color-surface-light);
@@ -60,7 +82,6 @@ footer {
 }
 
 .title {
-    color: var(--color-accent-light);
     line-height: 1.2;
     border-left: 0.1rem solid var(--color-accent-light);
     padding: 0.5em;
@@ -68,7 +89,7 @@ footer {
     text-decoration: none;
 }
 .title h1 {
-    font-weight: 400;
+    font-weight: 300;
     margin: 0;
 }
 
@@ -79,10 +100,14 @@ footer {
     padding: 1rem;
 }
 
+a.title {
+    color: var(--color-accent-light)
+}
+
 /* data-theme属性による切替 */
 [data-theme="dark"] {
     background-color: var(--color-bg-dark);
-    color: var(--color-bg-light);
+    color: var(--color-accent-dark);
 }
 [data-theme="dark"] header,
 [data-theme="dark"] footer {
@@ -94,6 +119,19 @@ footer {
 }
 [data-theme="dark"] a {
     color: var(--color-bg-light);
+}
+[data-theme="dark"] button {
+    color: var(--color-accent-dark);
+    background-color: var(--color-bg-dark);
+    border: var(--color-border-dark) 1px solid;
+}
+[data-theme="dark"] button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+[data-theme="dark"] button:active {
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
 }
 [data-theme="dark"] main {
     background-color: transparent;
