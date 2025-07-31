@@ -210,7 +210,7 @@ a.title {
     color: var(--color-accent-light);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 640px) {
     header {
         flex-direction: column;
     }
