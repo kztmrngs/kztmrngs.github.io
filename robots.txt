@@ -1,9 +1,54 @@
+# すべてのクローラーに対する基本ルール
+# 特定のクローラーを除き、サイト全体へのアクセスを拒否します。
 User-agent: *
 Disallow: /
-Allow: /index.html
 
+# Googlebotに対するルール
+# Googleのクローラーにはサイト全体へのアクセスを許可します。
 User-agent: Googlebot
 Allow: /
 
+# bingbotに対するルール
+# Bingのクローラーにもサイト全体へのアクセスを許可します。
 User-agent: bingbot
 Allow: /
+
+# Common Crawlのクローラーに対するルール
+# Common Crawlのクローラーにはサイト全体へのアクセスを許可しますが、
+# /blog/以下のパスは拒否します。
+User-agent: CCBot
+Allow: /
+Disallow: /blog/
+
+# LLM系ボットやAI関連クローラーに対するルール
+# 以下に挙げるクローラーはサイト全体へのアクセスを拒否します。
+
+# OpenAI関連
+User-agent: GPTBot
+Disallow: /
+User-agent: ChatGPT-User
+Disallow: /
+
+# Anthropic関連
+User-agent: ClaudeBot
+Disallow: /
+
+# Google LLM学習用
+User-agent: Omgilibot
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
+
+# Facebook（Meta）AI関連
+User-agent: FacebookBot
+Disallow: /
+User-agent: LlamaBot
+Disallow: /
+
+# その他メジャーなAI学習関連
+User-agent: PerplexityBot
+Disallow: /
+User-agent: Bytespider
+Disallow: /
+User-agent: Amazonbot
+Disallow: /
