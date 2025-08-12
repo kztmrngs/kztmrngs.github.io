@@ -5,13 +5,26 @@ Disallow: /
 
 # Googlebotに対するルール
 # Googleのクローラーにはサイト全体へのアクセスを許可します。
-User-agent: Googlebot
+User-agent: Googlebot*
 Allow: /
 
 # bingbotに対するルール
 # Bingのクローラーにもサイト全体へのアクセスを許可します。
 User-agent: bingbot
 Allow: /
+
+# DuckDuckGo (DuckDuckBot)
+User-agent: DuckDuckBot
+Allow: /
+
+# Yahoo! JAPAN（検索用）
+User-agent: Yahoo! Slurp
+Allow: /
+
+# Internet Archive
+User-agent: ia_archiver
+Allow: /
+
 
 # Common Crawlのクローラーに対するルール
 # Common Crawlのクローラーにはサイト全体へのアクセスを許可しますが、
