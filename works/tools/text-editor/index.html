@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テキストエディタ</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <!-- フォント読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div>
+        <div class="title">
+            <div class="title-text">テキストエディタ</div>
+            <div class="menu">
+                <a href="/">HOME</a>|
+                <a href="/works">作品一覧</a>|
+                <a href="/blog">ブログ</a>
+            </div>
+        </div>
+        <div class="editor">
+            <div class="toolbar">
+                <div class="operations">
+                    <input type="text" id="filename" placeholder="ファイル名を入力">
+                    <button id="save" onclick="saveFile()">保存</button>
+                    <label for="load-file" class="file-label">参照</label>
+                    <input type="file" id="load-file" style="display:none;">
+                    <span id="file-name-display">ファイルが選択されていません。</span>
+                    <button id="loadButton" onclick="loadFile()">読み込み</button>
+                </div>
+                <div class="search-replace">
+                    <input type="text" id="search-text" placeholder="検索文字列">
+                    <input type="text" id="replace-text" placeholder="置換文字列">
+                    <button onclick="searchText()">検索</button>
+                    <button onclick="replaceText()">置換</button>
+                    <button onclick="replaceAllText()">すべて置換</button>
+                </div>
+            </div>
+            <div class="editor-container">
+                <div class="line-numbers" id="line-numbers"></div>
+                <textarea id="text-editor" placeholder="ここにテキストを入力してください..."></textarea>
+            </div>
+        </div>
+</body>
+
+</html>

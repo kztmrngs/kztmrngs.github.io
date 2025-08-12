@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>画像品質評価ツール | SSIM/MS-SSIM/PSNR計算</title>
+    <meta name="description" content="2枚の画像を比較し、SSIM、MS-SSIM、PSNRを計算して表示する無料ツールです。">
+    <meta name="keywords" content="画像品質, SSIM, MS-SSIM, PSNR, 画像比較, 無料ツール">
+    <link rel="canonical" href="https://newline-crlf.github.io/works/tools/img-quality-evaluation/">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="script.js" type="text/javascript" async></script>
+</head>
+
+<body>
+    <header>
+        <a href="/">HOME</a>|<a href="/works/">作品一覧</a>|<a href="/blog">ブログ</a>
+        <h1>画像品質評価ツール</h1>
+        <p>2枚の画像を比較し、SSIM/MS-SSIM/PSNRを計算します。</p>
+    </header>
+    <div class="container">
+        <div class="image-upload-section">
+            <div class="image-input">
+                <h2>画像1 (参照画像)</h2>
+                <input type="file" id="image1Input" accept="image/*">
+                <canvas id="image1Canvas"></canvas>
+            </div>
+            <div class="image-input">
+                <h2>画像2 (比較画像)</h2>
+                <input type="file" id="image2Input" accept="image/*">
+                <canvas id="image2Canvas"></canvas>
+            </div>
+        </div>
+        <hr />
+        <div id="results">
+            <table>
+                <tr>
+                    <th>SSIM</th>
+                    <td id="ssimResult">N/A</td>
+                </tr>
+                <tr>
+                    <th>MS-SSIM</th>
+                    <td id="msSsimResult">N/A</td>
+                </tr>
+                <tr>
+                    <th>PSNR</th>
+                    <td id="psnrResult">N/A</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

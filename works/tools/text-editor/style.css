@@ -1,0 +1,193 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f8fafc;
+    font-family: "Noto Sans JP", "Noto Serif JP", serif !important;
+    color: #222;
+    letter-spacing: 0.02em;
+}
+
+.title {
+    background: linear-gradient(90deg, #e3e8ee 0%, #f0f4f8 100%);
+    padding: 18px 32px 14px 32px;
+    display: flex;
+    border-bottom: 2px solid #3b82f6;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(60, 60, 60, 0.04);
+    font-family: "Noto Sans JP", sans-serif
+}
+
+.title .title-text {
+    font-family: "Noto Sans JP", sans-serif;
+    flex: 1;
+    font-size: 28px;
+    font-weight: 400;
+    color: #2563eb;
+    letter-spacing: 0.04em;
+}
+
+.title .menu {
+    margin: 0;
+    display: flex;
+    gap: 18px;
+    font-size: 16px;
+}
+
+.title .menu a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 400;
+    padding: 2px 8px;
+    border-radius: 0px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.title .menu a:hover {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.toolbar {
+    background: #f1f5f9;
+    display: flex;
+    gap: 24px;
+    padding: 14px 32px;
+    border-bottom: 1px solid #e0e7ef;
+    align-items: center;
+}
+
+.toolbar input[type="text"] {
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 15px;
+    background: #fff;
+    transition: border 0.2s;
+    margin-right: 6px;
+}
+
+.toolbar input[type="text"]:focus {
+    border: 1.5px solid #3b82f6;
+    outline: none;
+}
+
+.toolbar button {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-right: 6px;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 2px rgba(60, 60, 60, 0.04);
+}
+
+.toolbar button:hover {
+    background: #1d4ed8;
+}
+
+.toolbar input[type="file"] {
+    display: none;
+}
+
+.file-label {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-right: 6px;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 2px rgba(60, 60, 60, 0.04);
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.file-label:hover {
+    background: #1d4ed8;
+}
+
+/* ファイル名表示用 */
+#file-name-display {
+    font-size: 15px;
+    color: #64748b;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+.editor-container {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 120px);
+    background: #fff;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 0 0 8px 8px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 12px rgba(60, 60, 60, 0.06);
+    overflow: hidden;
+}
+
+.line-numbers {
+    background: #f3f4f6;
+    color: #64748b;
+    font-family: monospace;
+    font-size: 16px;
+    padding: 12px 6px 12px 12px;
+    text-align: right;
+    user-select: none;
+    border-right: 1.5px solid #e0e7ef;
+    min-width: 38px;
+    box-sizing: border-box;
+    height: 100%;
+    overflow: hidden;
+}
+
+textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    padding: 12px 16px;
+    font-family: "JetBrains Mono", "Fira Mono", "Noto Sans JP", monospace;
+    font-size: 16px;
+    border: none;
+    box-sizing: border-box;
+    outline: none;
+    background: transparent;
+    color: #222;
+    line-height: 1.7;
+    transition: background 0.2s;
+}
+
+.editor {
+    width: 100%;
+    background: #fff;
+    border-radius: 0 0 8px 8px;
+    box-shadow: none;
+}
+
+.operations,
+.search-replace {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* スクロールバーを細く */
+textarea::-webkit-scrollbar,
+.line-numbers::-webkit-scrollbar {
+    width: 8px;
+    background: #f1f5f9;
+}
+
+textarea::-webkit-scrollbar-thumb,
+.line-numbers::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}

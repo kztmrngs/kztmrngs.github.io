@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>テキスト比較(Diff)ツール | 2つのテキストの差分を表示</title>
+    <meta name="description" content="2つのテキストの差分（diff）をオンラインで簡単に比較・表示する無料ツールです。行単位での追加・削除を分かりやすくハイライトします。">
+    <meta name="keywords" content="diff, 比較, テキスト, 差分, オンラインツール, 無料">
+    <link rel="canonical" href="https://newline-crlf.github.io/works/tools/diff/">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="script.js" type="text/javascript" async></script>
+</head>
+
+<body>
+    <header>
+        <a href="/">HOME</a>|<a href="/works/">作品一覧</a>|<a href="/blog">ブログ</a>
+        <h1>テキスト比較 (Diff)</h1>
+        <p>2つのテキストの差分を表示します</p>
+    </header>
+    <div class="container">
+        <textarea id="text1" placeholder="テキスト1"></textarea>
+        <textarea id="text2" placeholder="テキスト2"></textarea>
+    </div>
+    <div id="diff-mode">
+        <label><input type="radio" name="mode" value="line" checked> 行単位</label>
+        <label><input type="radio" name="mode" value="char"> 文字単位</label>
+    </div>
+    <button id="compare">比較</button>
+    <hr />
+    <h2>比較結果</h2>
+    <pre id="diff-output"></pre>
+</body>
+
+</html>

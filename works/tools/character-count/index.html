@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>文字数カウントツール | 文字数・単語数・バイト数を即時計算</title>
+    <meta name="description" content="日本語・英語対応の無料文字数カウントツール。入力したテキストの文字数、単語数、行数、バイト数（UTF-8/UTF-16/Shift_JIS）を即座に計算します。">
+    <meta name="keywords" content="文字数カウント, 文字数, 単語数, 行数, バイト数, UTF-8, UTF-16, Shift_JIS, 無料ツール">
+    <link rel="canonical" href="https://newline-crlf.github.io/works/tools/character-count/">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="script.js" type="text/javascript" async></script>
+</head>
+
+<body>
+    <header>
+        <a href="/">HOME</a>|<a href="/works/">作品一覧</a>|<a href="/blog">ブログ</a>
+        <h1>文字数カウント</h1>
+        <p>文字数をカウントします</p>
+    </header>
+    <textarea id="text" placeholder="ここに文字を入力してください..."></textarea>
+    <hr />
+    <div id="count">
+        <table>
+            <tr>
+                <th>文字数</th>
+                <td id="char-count">0</td>
+            </tr>
+            <tr>
+                <th>文字数(空白抜き)</th>
+                <td id="char-count-no-space">0</td>
+            </tr>
+            <tr>
+                <th>行数</th>
+                <td id="line-count">0</td>
+            </tr>
+            <tr>
+                <th>単語数</th>
+                <td id="word-count">0</td>
+            </tr>
+            <tr>
+                <th>UTF-8 バイト数</th>
+                <td id="utf-8-byte-count">0</td>
+            </tr>
+            <tr>
+                <th>UTF-16 バイト数</th>
+                <td id="utf-16-byte-count">0</td>
+            </tr>
+            <tr>
+                <th>Shift_JIS バイト数</th>
+                <td id="shift-jis-byte-count">0</td>
+            </tr>
+
+        </table>
+    </div>
+</body>
+
+</html>

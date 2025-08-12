@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>複素数四則演算可視化</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>複素数四則演算可視化</h1>
+            <button id="theme-toggle" class="theme-toggle">🌙</button>
+        </header>
+
+        <div class="calculator-section">
+            <div class="input-section">
+                <div class="complex-input">
+                    <h3>第1の複素数 (a + bi)</h3>
+                    <div class="input-group">
+                        <label for="a1">実部 a:</label>
+                        <input type="number" id="a1" value="3" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label for="b1">虚部 b:</label>
+                        <input type="number" id="b1" value="2" step="0.1">
+                    </div>
+                </div>
+
+                <div class="complex-input">
+                    <h3>第2の複素数 (c + di)</h3>
+                    <div class="input-group">
+                        <label for="a2">実部 c:</label>
+                        <input type="number" id="a2" value="1" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label for="b2">虚部 d:</label>
+                        <input type="number" id="b2" value="1" step="0.1">
+                    </div>
+                </div>
+
+                <div class="operation-section">
+                    <h3>演算</h3>
+                    <div class="operation-buttons">
+                        <button id="add" class="operation-btn active" data-op="add">+</button>
+                        <button id="subtract" class="operation-btn" data-op="subtract">-</button>
+                        <button id="multiply" class="operation-btn" data-op="multiply">×</button>
+                        <button id="divide" class="operation-btn" data-op="divide">÷</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3>計算結果</h3>
+                <div id="result-display" class="result-display">
+                    (3 + 2i) + (1 + 1i) = 4 + 3i
+                </div>
+                <div id="polar-display" class="polar-display">
+                    極形式: 5.00 ∠ 36.87°
+                </div>
+            </div>
+        </div>
+
+        <div class="visualization-section">
+            <canvas id="complex-plane" width="600" height="600"></canvas>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #3498db;"></div>
+                    <span>第1の複素数</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #e74c3c;"></div>
+                    <span>第2の複素数</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #2ecc71;"></div>
+                    <span>結果</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

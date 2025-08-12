@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /
+Allow: /index.html
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: bingbot
+Allow: /
