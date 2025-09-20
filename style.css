@@ -1,17 +1,26 @@
+/* テーマ全体で利用する色を変数として定義します */
 :root {
-    --color-surface-light: #f8f8f8;
-    --color-surface-dark: #232323;
-    --color-border-light: #ccc;
-    --color-border-dark: #444;
-    --color-bg-dark: #2c2c2c;
-    --color-bg-light: #f3f3f3;
+    --color-surface: #f8f8f8;
+    --color-border: #ccc;
+    --color-bg: #f3f3f3;
+    --color-text: #000;
     --color-primary: #007fff;
-    --color-divider-light: #000;
-    --color-divider-dark: #444;
-    --color-accent-light: #000;
-    --color-accent-dark: #f3f3f3;
-    --color-white: #fff;
     --color-primary-dark: #005fcc;
+    --color-divider: #000;
+    --color-white: #fff;
+    /* リンクの色を専用の変数として切り出します */
+    --color-link: var(--color-primary);
+}
+
+/* JavaScriptからdata-theme="dark"が指定された際に、変数の値を上書きします */
+[data-theme="dark"] {
+    --color-surface: #232323;
+    --color-border: #444;
+    --color-bg: #2c2c2c;
+    --color-text: #f3f3f3;
+    --color-divider: #444;
+    /* ダークモードでは、元の設計通り明るい色（#f3f3f3）をリンク色に設定します */
+    --color-link: #f3f3f3;
 }
 
 html, body {
@@ -20,7 +29,10 @@ html, body {
     padding: 0;
     transition: all 0.2s ease-in-out;
     font-size: 14px;
+    background-color: var(--color-bg);
+    color: var(--color-text);
 }
+
 body {
     font-family: 'Noto Sans JP', sans-serif;
     line-height: 1.9;
@@ -28,67 +40,87 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+/* main要素が利用可能な高さいっぱいに広がるように設定します */
 main {
     flex: 1;
 }
+
 h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     margin: 0.25em 0;
 }
+
 hr {
     border: 0;
-    border-top: 1px solid var(--color-divider-light);
+    border-top: 1px solid var(--color-divider);
 }
+
 p {
     margin: 0;
 }
+
+/* 画像が親要素の幅を超えないように、また高さが自動調整されるようにします */
 img {
     max-width: 100%;
     height: auto;
 }
-a {
-    color: var(--color-primary);
+
+.screenshot {
+    max-width: 70%;
 }
+
+a {
+    /* テーマに応じて変化するリンク専用の変数を適用します */
+    color: var(--color-link);
+}
+
 button {
-    color: var(--color-accent-light);
-    background-color: var(--color-bg-light);
-    border: var(--color-border-light) 1px solid;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    border: var(--color-border) 1px solid;
     padding: 0.25rem 0.5rem;
     transition: background 0.2s, color 0.2s, transform 0.1s;
 }
+
 button:hover {
     background-color: var(--color-primary);
     color: var(--color-white);
     transform: scale(1.04);
 }
+
 button:active {
     background-color: var(--color-primary-dark);
     color: var(--color-white);
     transform: scale(0.97);
 }
+
 header {
-    background-color: var(--color-surface-light);
-    border-bottom: 1px solid var(--color-border-light);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
     padding: 1rem;
     display: flex;
 }
+
 main {
     padding: 1rem;
 }
+
 footer {
     text-align: center;
     padding: 1rem 0;
-    background-color: var(--color-surface-light);
-    border-top: 1px solid var(--color-border-light);
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
 }
 
 .title {
     line-height: 1.2;
-    border-left: 0.1rem solid var(--color-accent-light);
+    border-left: 0.1rem solid var(--color-text);
     padding: 0.5em;
     margin: 0.5rem 0;
     text-decoration: none;
 }
+
 .title h1 {
     font-weight: 300;
     margin: 0;
@@ -102,43 +134,7 @@ footer {
 }
 
 a.title {
-    color: var(--color-accent-light)
-}
-
-/* data-theme属性による切替 */
-[data-theme="dark"] {
-    background-color: var(--color-bg-dark);
-    color: var(--color-accent-dark);
-}
-[data-theme="dark"] header,
-[data-theme="dark"] footer {
-    background-color: var(--color-surface-dark);
-    border-color: var(--color-border-dark);
-}
-[data-theme="dark"] hr {
-    border-top-color: var(--color-divider-dark);
-}
-[data-theme="dark"] a {
-    color: var(--color-bg-light);
-}
-[data-theme="dark"] button {
-    color: var(--color-accent-dark);
-    background-color: var(--color-bg-dark);
-    border: var(--color-border-dark) 1px solid;
-}
-[data-theme="dark"] button:hover {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-}
-[data-theme="dark"] button:active {
-    background-color: var(--color-primary-dark);
-    color: var(--color-white);
-}
-[data-theme="dark"] main {
-    background-color: transparent;
-}
-[data-theme="dark"] .title {
-    border-left-color: var(--color-accent-dark);
+    color: var(--color-text);
 }
 
 #theme-toggle {
@@ -150,6 +146,8 @@ a.title {
     color: inherit;
     outline: none;
 }
+
+/* キーボード操作によるフォーカスを視覚的に分かりやすく示します */
 #theme-toggle:focus {
     outline: 2px solid var(--color-primary);
 }
@@ -158,21 +156,27 @@ a.title {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
+    /* 意図しないテキスト選択を防ぎ、UIとしての操作性を向上させます */
     user-select: none;
 }
+
+/* HTML上のチェックボックスを非表示にしつつ、機能（チェック状態）は維持します */
 .toggle-switch input[type="checkbox"] {
     display: none;
 }
+
 .toggle-switch .slider {
     width: 36px;
     height: 20px;
-    background: var(--color-border-light);
+    background: var(--color-border);
     border-radius: 999px;
     position: relative;
     transition: background 0.2s;
     margin: 0 0.5em 0 0;
     box-sizing: border-box;
 }
+
+/* スライダー内の円（つまみ）を疑似要素として描画します */
 .toggle-switch .slider::before {
     content: "";
     position: absolute;
@@ -180,37 +184,28 @@ a.title {
     top: 2px;
     width: 16px;
     height: 16px;
-    background: var(--color-bg-light);
+    background: var(--color-bg);
     border-radius: 50%;
     transition: transform 0.2s;
 }
+
+/* チェックボックスがオンの時に、隣接するスライダーの背景色を変更します */
 .toggle-switch input[type="checkbox"]:checked + .slider {
     background: var(--color-primary);
 }
+
+/* チェックボックスがオンの時に、つまみを右に移動させます */
 .toggle-switch input[type="checkbox"]:checked + .slider::before {
     transform: translateX(16px);
 }
+
 .toggle-switch .toggle-icon {
     font-size: 1.2em;
     transition: color 0.2s;
     margin-left: 0.2em;
 }
-[data-theme="dark"] .toggle-switch .slider {
-    background: var(--color-border-dark);
-}
-[data-theme="dark"] .toggle-switch .slider::before {
-    background: var(--color-bg-dark);
-}
-[data-theme="dark"] .toggle-switch input[type="checkbox"]:checked + .slider {
-    background: var(--color-primary);
-}
-[data-theme="dark"] .toggle-switch .toggle-icon {
-    color: var(--color-accent-dark);
-}
-[data-theme="light"] .toggle-switch .toggle-icon {
-    color: var(--color-accent-light);
-}
 
+/* スマートフォンなどの狭い画面幅に対応するためのレイアウト調整です */
 @media (max-width: 640px) {
     header {
         flex-direction: column;
