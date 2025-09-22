@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>crun</title>
+    <style>
+        body {
+            font-family: "Noto Sans JP", sans-serif;
+            line-height: 1.6;
+            color: #000;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1,
+        h2,
+        h3 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        h3 {
+            font-size: 1.25em;
+        }
+
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            background-color: #f0f0f0;
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            border-radius: 3px;
+        }
+
+        pre {
+            background-color: #2d2d2d;
+            color: #f1f1f1;
+            padding: 16px;
+            overflow: auto;
+            border-radius: 6px;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+            font-size: 100%;
+            color: inherit;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        ul,
+        ol {
+            padding-left: 2em;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            display: block;
+            overflow-x: auto;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: 600;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #eaecef;
+            margin: 24px 0;
+        }
+
+        a {
+            color: #007fff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="/">HOME</a>|<a href="/works/">作品一覧</a>|<a href="/blog">ブログ</a>
+    </header>
+    <h1>crun</h1>
+    <p><code>crun</code>は、<strong>C/C++ソースファイルを指定するだけで自動的にコンパイル＆実行</strong>できる、Windows用のシンプルなコマンドラインツールです。<br>
+        Pythonのような手軽さでC/C++プログラムを試したい方に最適です。</p>
+
+    <hr>
+
+    <h2>特徴</h2>
+    <ul>
+        <li><strong>複数ソースファイル対応</strong>: <code>.c</code>または<code>.cpp</code>ファイルを複数指定して、まとめてビルド＆実行できます。</li>
+        <li><strong>インクルード内容を再帰的に解析し、必要なライブラリを自動リンク</strong>:
+            <ul>
+                <li><code>#include &lt;windows.h&gt;</code> -&gt; <code>-lkernel32 -luser32 ...</code></li>
+                <li><code>#include &lt;d3d11.h&gt;</code> -&gt; <code>-ld3d11</code></li>
+                <li><code>#include &lt;gl/gl.h&gt;</code> -&gt; <code>-lopengl32</code></li>
+                <li><code>#include &lt;pthread.h&gt;</code> -&gt; <code>-lpthread</code></li>
+                <li>その他、DirectX, GDI+, Winsockなど多数のWindows APIライブラリに対応。</li>
+            </ul>
+        </li>
+        <li><strong><code>#pragma comment(lib, "...")</code> に対応</strong>: ソースコード内のプラグマを解釈し、ライブラリをリンクします。</li>
+        <li><strong>実行ファイルサイズを最小化する最適化オプションを自動適用</strong></li>
+        <li><strong>警告オプションのサポート</strong>: <code>--wall</code>オプションでコンパイラの警告をすべて有効化できます。</li>
+        <li><strong>デバッグビルドのサポート</strong>: <code>--debug</code>または<code>-g</code>オプションでデバッグビルドを有効化できます。</li>
+        <li><strong>詳細出力</strong>: <code>--verbose</code>または<code>-v</code>オプションでコンパイルコマンドなどの詳細な出力を表示できます。</li>
+        <li>MinGW (gcc/g++) または Clang を利用（PATHが通っている必要あり）</li>
+        <li>一時ディレクトリでビルドし、実行後に自動削除（<code>--keep-temp</code>で保持可能）</li>
+        <li>追加のコンパイルオプション (<code>--cflags</code>) やライブラリ (<code>--libs</code>) もサポート</li>
+        <li>プログラム引数の指定も可能</li>
+        <li>標準入出力・エラーはそのまま親プロセスに引き継がれます</li>
+    </ul>
+
+    <hr>
+
+    <h2>インストール</h2>
+    <ol>
+        <li><strong>コンパイラをインストール</strong>: <a href="https://www.mingw-w64.org/">MinGW-w64</a> または <a href="https://clang.llvm.org/">Clang</a> をインストールしてください。
+            <ul>
+                <li>インストール時、「gcc.exe」「g++.exe」または「clang.exe」「clang++.exe」がインストールされていることを確認してください。</li>
+            </ul>
+        </li>
+        <li><strong>PATH環境変数を設定</strong>: MinGWまたはClangの<code>bin</code>ディレクトリ（例: <code>C:\mingw-w64\bin</code> や <code>C:\Program Files\LLVM\bin</code>）を<strong>PATH環境変数</strong>に追加してください。
+            <ul>
+                <li>コマンドプロンプトで <code>gcc --version</code> や <code>clang --version</code> が動作すればOKです。</li>
+            </ul>
+        </li>
+        <li><code>crun.exe</code>は、<code>crun_clang.exe</code>と<code>crun_gcc.exe</code>の両方がビルドされ、<code>crun.exe</code>は<code>crun_clang.exe</code>のコピーとして提供されます。<code>crun.exe</code>を任意のディレクトリに配置し、そのディレクトリもPATHに追加すると便利です。</li>
+    </ol>
+
+    <hr>
+
+    <h2>使い方</h2>
+    <pre><code class="language-sh">crun &lt;ソースファイル1&gt; [ソースファイル2...] [プログラム引数...] [オプション...]
+crun --clean
+</code></pre>
+    <ul>
+        <li><code>&lt;ソースファイル...&gt;</code>: 1つ以上の<code>.c</code>または<code>.cpp</code>ファイルを指定</li>
+        <li><code>[プログラム引数...]</code>: 実行するプログラムに渡す引数（任意）</li>
+        <li><code>[オプション...]</code>: crunの動作を制御するオプション（後述）</li>
+    </ul>
+    <h3>例</h3>
+    <pre><code class="language-sh"># 単一ファイル
+crun hello.c
+crun --compiler clang app.cpp arg1 arg2 --verbose
+
+# 複数ファイル
+crun main.c utils.c
+
+# ライブラリの自動リンク
+crun direct2d_app.cpp       # d2d1.h をインクルードしていれば -ld2d1 を自動追加
+crun network_app.c          # winsock2.h をインクルードしていれば -lws2_32 を自動追加
+crun pragma_test.c          # #pragma comment(lib, "user32") を解釈して -luser32 を追加
+
+# その他のオプション
+crun custom.c --cflags "-O3 -DNDEBUG" --libs "-lcustom"
+crun test.cpp --keep-temp
+crun benchmark.cpp --time
+crun --clean
+</code></pre>
+
+    <hr>
+
+    <h2>オプション一覧</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>オプション</th>
+                <th>説明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>--help</code></td>
+                <td>ヘルプを表示</td>
+            </tr>
+            <tr>
+                <td><code>--version</code></td>
+                <td>バージョン情報を表示 (v1.0.0)</td>
+            </tr>
+            <tr>
+                <td><code>--compiler &lt;name&gt;</code></td>
+                <td>使用するコンパイラを指定します (<code>gcc</code> or <code>clang</code>)。デフォルトは <code>gcc</code> です。</td>
+            </tr>
+            <tr>
+                <td><code>--cflags "&lt;flags&gt;"</code></td>
+                <td>追加のコンパイルフラグを指定。自動検出されたフラグを上書きします。</td>
+            </tr>
+            <tr>
+                <td><code>--libs "&lt;libs&gt;"</code></td>
+                <td>追加でリンクするライブラリを指定します (例: <code>"-luser32 -lgdi32"</code>)。</td>
+            </tr>
+            <tr>
+                <td><code>--keep-temp</code></td>
+                <td>実行後も一時ディレクトリを削除しない</td>
+            </tr>
+            <tr>
+                <td><code>--verbose</code>, <code>-v</code></td>
+                <td>詳細な出力を有効化</td>
+            </tr>
+            <tr>
+                <td><code>--time</code></td>
+                <td>プログラムの実行時間を計測・表示</td>
+            </tr>
+            <tr>
+                <td><code>--wall</code></td>
+                <td>コンパイラの警告をすべて有効化 (<code>-Wall</code>)</td>
+            </tr>
+            <tr>
+                <td><code>--debug</code>, <code>-g</code></td>
+                <td>デバッグビルドを有効化 (<code>-g</code>)</td>
+            </tr>
+            <tr>
+                <td><code>--clean</code></td>
+                <td>カレントディレクトリの一時ディレクトリをすべて削除</td>
+            </tr>
+        </tbody>
+    </table>
+    <ul>
+        <li>オプションは<strong>どの位置でも指定可能</strong>です（例: <code>crun --verbose hello.c</code> もOK）。</li>
+        <li><code>--cflags</code> や <code>--libs</code> の直後にフラグ文字列を指定してください（例: <code>--cflags "-Wall -O2"</code>）。</li>
+    </ul>
+
+    <hr>
+
+    <h2>自動コンパイルオプション</h2>
+    <p><code>crun</code>は、コンパイル時に以下のオプションを自動的に適用します。</p>
+    <ul>
+        <li><strong>基本最適化</strong>: <code>-O2 -s</code> (実行ファイルのサイズと速度を両立)</li>
+        <li><strong>デバッグビルド</strong>: <code>--debug</code> 指定時は <code>-g</code></li>
+        <li><strong>ライブラリ自動リンク</strong>: ソースコードが特定のヘッダファイル（例: <code>pthread.h</code>, <code>math.h</code>, <code>windows.h</code>, <code>d3d11.h</code>, <code>winsock2.h</code>）をインクルードしている場合や、<code>#pragma comment(lib, ...)</code> が記述されている場合、対応するライブラリリンクオプション（例: <code>-lpthread</code>, <code>-lm</code>, <code>-lkernel32</code>, <code>-ld3d11</code>, <code>-lws2_32</code>）を自動的に追加します。</li>
+    </ul>
+    <p>これらの自動オプションは、<code>--cflags</code> や <code>--libs</code> オプションで追加・上書きすることが可能です。</p>
+
+    <hr>
+
+    <h2>動作の流れ</h2>
+    <ol>
+        <li>ソースファイルの存在と拡張子（<code>.c</code>/<code>.cpp</code>）をチェック</li>
+        <li>一時ディレクトリを作成し、そこにビルド</li>
+        <li><strong>ソースファイルと、そこから <code>#include</code> されているヘッダファイルを再帰的に解析</strong></li>
+        <li><strong><code>#include</code> や <code>#pragma comment</code> の内容から、必要なコンパイラオプションとリンクするライブラリを自動決定</strong></li>
+        <li>MinGWの<code>gcc.exe</code>/<code>g++.exe</code>またはClangの<code>clang.exe</code>/<code>clang++.exe</code>でコンパイル</li>
+        <li>実行ファイルを生成し、指定した引数で実行</li>
+        <li>終了後、一時ディレクトリを自動削除（<code>--keep-temp</code>指定時は保持）</li>
+    </ol>
+
+    <hr>
+
+    <h2>注意事項</h2>
+    <ul>
+        <li><strong>対応ファイル</strong>: <code>.c</code>または<code>.cpp</code>のみ対応しています。</li>
+        <li><strong>コンパイラ必須</strong>: MinGW (gcc/g++) または Clang (clang/clang++) のインストールとPATH設定が必要です。</li>
+        <li><strong>管理者権限不要</strong>: 通常のユーザー権限で動作します。</li>
+        <li><strong>一時ディレクトリ</strong>: 最初のソースファイルと同じディレクトリ内に<code>crun_tmp_...</code>という一時ディレクトリを作成します。</li>
+        <li><strong>エラー時の挙動</strong>: コンパイルエラーや実行エラー時はエラーメッセージを表示し、終了コード1で終了します。<code>Ctrl+C</code> などで中断された場合も、一時ディレクトリは自動的にクリーンアップされます。</li>
+        <li><strong>日本語ファイル名</strong>: 日本語やスペースを含むパスにも対応しています。</li>
+    </ul>
+
+    <hr>
+
+    <h2>よくある質問</h2>
+    <h3>Q. コンパイラが見つからないと言われる</h3>
+    <p>A. <code>gcc.exe</code>/<code>g++.exe</code>または<code>clang.exe</code>/<code>clang++.exe</code>がPATHに含まれているか確認してください。コマンドプロンプトで <code>gcc --version</code> や <code>clang --version</code> が動作すればOKです。それでも見つからない場合は、crunを実行しているターミナルを再起動してみてください。</p>
+    <h3>Q. 一時ディレクトリが消えない</h3>
+    <p>A. <code>--keep-temp</code>オプションを指定した場合や、ごく稀な異常終了時に残ることがあります。不要な場合は <code>crun --clean</code> コマンドでカレントディレクトリのものを削除できます。</p>
+    <h3>Q. どのコンパイラが使われますか？</h3>
+    <p>A. デフォルトでは、<code>.c</code>ファイルのみの場合は<code>gcc.exe</code>、<code>.cpp</code>ファイルが1つでも含まれる場合は<code>g++.exe</code>が自動的に選択されます。<code>--compiler clang</code> オプションを指定すると、<code>clang.exe</code> と <code>clang++.exe</code> が使用されます。</p>
+    <h3>Q. 標準入力や標準出力はどうなりますか？</h3>
+    <p>A. crun自身の標準入出力・エラーは、実行したプログラムにそのまま引き継がれます。</p>
+
+    <hr>
+
+    <h2>ライセンス</h2>
+    <p>MITライセンス</p>
+
+</body>
+
+</html>
