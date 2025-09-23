@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="風止渚のホームページ">
+        <meta name="author" content="風止渚">
+        <title>風止渚のホームページ</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script src="/script.js" defer></script>
+    </head>
+    <body>
+        <header id="header-placeholder"></header>
+        <main>
+            <h1>クイックソート</h1>
+            <p>クイックソートは、高速なソートアルゴリズムの一つです。分割統治法に基づいており、以下の手順で動作します。</p>
+            <ol>
+                <li>配列からピボットを選択する。</li>
+                <li>ピボットより小さい要素と大きい要素に分割する。</li>
+                <li>再帰的に各部分をソートする。</li>
+            </ol>
+            <p>クイックソートの平均計算量はO(n log n)ですが、最悪の場合はO(n^2)となることがあります。</p>
+            <h2>実装例</h2>
+            <p>Lumote - 擬似コード</p>
+            <pre><code>
+function quickSort(array)
+    if length(array) < 2
+        return array
+    pivot = array[length(array) / 2]
+    left = []
+    right = []
+    for i in 0 to length(array) - 1
+        if array[i] < pivot
+            left.push(array[i])
+        else
+            right.push(array[i])
+    return quickSort(left) + [pivot] + quickSort(right)
+            </code></pre>
+            <p>Hoare - 擬似コード</p>
+            <pre><code>
+function quickSort(array, low, high)
+    if low < high
+        pivotIndex = partition(array, low, high)
+        quickSort(array, low, pivotIndex - 1)
+        quickSort(array, pivotIndex + 1, high)
+    return array
+
+function partition(array, low, high)
+    pivot = array[high]
+    i = low - 1
+    for j in low to high - 1
+        if array[j] < pivot
+            i = i + 1
+            swap(array[i], array[j])
+    swap(array[i + 1], array[high])
+    return i + 1
+            </code></pre>
+            <p>クイックソートは、効率的で広く使用されているソートアルゴリズムです。適切なピボットの選択と実装により、非常に高速なソートが可能です。</p>
+        </main>
+        <footer id="footer-placeholder"></footer>
+    </body>
+</html>
