@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="風止渚のホームページ">
+        <meta name="author" content="風止渚">
+        <title>風止渚のホームページ</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script src="/script.js" defer></script>
+    </head>
+    <body>
+        <header id="header-placeholder"></header>
+        <main>
+            <h1>aviutlでメモリエラーが出たときの私の解決方法</h1>
+            <div class="blog-date">
+                <p>2025年9月24日作成・2025年9月24日最終編集</p>
+            </div>
+            <p><strong>結論: </strong>最大画像サイズを小さくする。</p>
+            <p>無駄に大きい最大サイズはメモリエラーの原因になります。</p>
+            <h2>環境</h2>
+            <ul>
+                <li>Windows 11 Home (24H2)</li>
+                <li>aviutl 1.10</li>
+                <li>拡張編集プラグイン 0.92</li>
+                <li>L-SMASH Works r1245 by Mr-Ojii</li>
+                <li>inputPipePlugin 2.0</li>
+                <li>x264guiEx 4.05</li>
+                <li>アルティメットプラグイン r93</li>
+                <li>patch.aul r43_ss_73</li>
+                <li>YMM4 4.45.4.2</li>
+            </ul>
+            <h2>症状</h2>
+            <p>YMM4のために、サクッとaviutl環境を作りましたがexoファイルを読み込むと毎回メモリエラーが発生しました。</p>
+            <img src="./img/memoryErrorImageSize3.png" alt="aviutlのメモリエラー画面" class="micro-screenshot" loading="lazy">
+            <p>そこで、構成を変えたりしましたが解決しませんでした。</p>
+            <p>最終的に、<strong>最大画像サイズを小さくする</strong>ことで解決しました。</p>
+            <p>まずaviutlを起動しファイル→環境設定→システムの設定→最大画像サイズを変更します。</p>
+            <img src="./img/memoryErrorImageSize1.png" alt="aviutlの最大画像サイズ設定画面" class="micro-screenshot" loading="lazy">
+            <br>
+            <img src="./img/memoryErrorImageSize2.png" alt="aviutlの最大画像サイズ設定画面2" class="micro-screenshot" loading="lazy">
+            <p>私は最初16384x16384に設定していましたが、最終的に4096x4096に変更しました。どうやら5000x5000でも行けましたが、余裕を持って4096x4096にしました。</p>
+        </main>
+        <footer id="footer-placeholder"></footer>
+    </body>
+</html>
