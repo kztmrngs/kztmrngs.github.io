@@ -10,6 +10,7 @@
     --color-white: #fff;
     /* リンクの色を専用の変数として切り出します */
     --color-link: var(--color-primary);
+    --color-link-active: var(--color-primary-dark);
 }
 
 /* JavaScriptからdata-theme="dark"が指定された際に、変数の値を上書きします */
@@ -21,6 +22,7 @@
     --color-divider: #444;
     /* ダークモードでは、元の設計通り明るい色（#f3f3f3）をリンク色に設定します */
     --color-link: #f3f3f3;
+    --color-link-active: #b5b5b5;
 }
 
 html, body {
@@ -81,6 +83,10 @@ img {
 a {
     /* テーマに応じて変化するリンク専用の変数を適用します */
     color: var(--color-link);
+}
+
+a:active{
+    color: var(--color-link-active);
 }
 
 button {
