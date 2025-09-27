@@ -1,29 +1,142 @@
 body {
+    --accent-color: #3b82f6;
+    --accent-color-hover: #2563eb;
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --border-color: #dee2e6;
+    --header-bg: #ffffff;
+    --editor-bg: #fff;
+    --line-number-bg: #f8f9fa;
+    --line-number-color: #adb5bd;
+    --button-text-color: #fff;
+    --secondary-button-bg: #ffffff;
+    --secondary-button-text: #495057;
+    --secondary-button-border: #ced4da;
+    --secondary-button-hover-bg: #f8f9fa;
+    --secondary-button-hover-border: #adb5bd;
+    --secondary-button-hover-text: #212529;
+    --input-bg: #fff;
+    --input-border: #ced4da;
+    --input-focus-border: #3b82f6;
+    --input-focus-shadow: rgba(59, 130, 246, 0.1);
+    --placeholder-color: #6c757d;
+    --menu-link-color: #495057;
+    --scrollbar-thumb-color: #ced4da;
+
     margin: 0;
     padding: 0;
-    background-color: #f8fafc;
+    background-color: var(--bg-color);
     font-family: "Noto Sans JP", "Noto Serif JP", serif !important;
-    color: #222;
+    color: var(--text-color);
     letter-spacing: 0.02em;
+    transition: background-color 0.3s, color 0.3s;
 }
 
+/* Color Themes */
+body.theme-white {
+    --accent-color: #888;
+    --accent-color-hover: #666;
+    --bg-color: #fff;
+    --header-bg: #fff;
+    --editor-bg: #fff;
+    --line-number-bg: #f7f7f7;
+    --input-focus-border: #888;
+    --input-focus-shadow: rgba(136, 136, 136, 0.1);
+}
+body.theme-red { --accent-color: #ef4444; --accent-color-hover: #dc2626; --input-focus-border: #ef4444; --input-focus-shadow: rgba(239, 68, 68, 0.1); }
+body.theme-yellow { --accent-color: #f59e0b; --accent-color-hover: #d97706; --input-focus-border: #f59e0b; --input-focus-shadow: rgba(245, 158, 11, 0.1); }
+body.theme-green { --accent-color: #22c55e; --accent-color-hover: #16a34a; --input-focus-border: #22c55e; --input-focus-shadow: rgba(34, 197, 94, 0.1); }
+body.theme-blue { --accent-color: #3b82f6; --accent-color-hover: #2563eb; --input-focus-border: #3b82f6; --input-focus-shadow: rgba(59, 130, 246, 0.1); }
+body.theme-purple { --accent-color: #8b5cf6; --accent-color-hover: #7c3aed; --input-focus-border: #8b5cf6; --input-focus-shadow: rgba(139, 92, 246, 0.1); }
+
+/* Dark Mode - Accent Only */
+body.dark-accent {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --border-color: #333;
+    --header-bg: #1e1e1e;
+    --editor-bg: #1e1e1e;
+    --line-number-bg: #1e1e1e;
+    --line-number-color: #888;
+    --secondary-button-bg: #333;
+    --secondary-button-text: #e0e0e0;
+    --secondary-button-border: #555;
+    --secondary-button-hover-bg: #444;
+    --secondary-button-hover-border: #777;
+    --secondary-button-hover-text: #fff;
+    --input-bg: #252525;
+    --input-border: #555;
+    --placeholder-color: #888;
+    --menu-link-color: #ccc;
+    --scrollbar-thumb-color: #555;
+}
+
+/* Dark Mode - Full */
+body.dark-full {
+    --bg-color: #1e1e2f;
+    --text-color: #d4d4d4;
+    --border-color: #2d2d44;
+    --header-bg: #191926;
+    --editor-bg: #191926;
+    --line-number-bg: #191926;
+    --line-number-color: #6a6a7a;
+    --button-text-color: #ffffff;
+    --secondary-button-bg: #2d2d44;
+    --secondary-button-text: #d4d4d4;
+    --secondary-button-border: #444466;
+    --secondary-button-hover-bg: #3c3c58;
+    --secondary-button-hover-border: #555588;
+    --secondary-button-hover-text: #ffffff;
+    --input-bg: #252538;
+    --input-border: #444466;
+    --placeholder-color: #6a6a7a;
+    --menu-link-color: #b0b0c0;
+    --scrollbar-thumb-color: #444466;
+}
+body.dark-full.theme-red {
+    --accent-color: #f47171; --accent-color-hover: #ef4444; --input-focus-border: #f47171; --input-focus-shadow: rgba(244, 113, 113, 0.2);
+    --bg-color: #2f1e1e; --header-bg: #261919; --editor-bg: #261919; --line-number-bg: #261919; --line-number-color: #7a6a6a; --border-color: #442d2d; --secondary-button-bg: #442d2d; --secondary-button-hover-bg: #583c3c; --input-bg: #382525; --input-border: #664444; --scrollbar-thumb-color: #664444;
+}
+body.dark-full.theme-yellow {
+    --accent-color: #f5b958; --accent-color-hover: #f59e0b; --input-focus-border: #f5b958; --input-focus-shadow: rgba(245, 185, 88, 0.2);
+    --bg-color: #2f2a1e; --header-bg: #262219; --editor-bg: #262219; --line-number-bg: #262219; --line-number-color: #7a756a; --border-color: #443c2d; --secondary-button-bg: #443c2d; --secondary-button-hover-bg: #584d3c; --input-bg: #383225; --input-border: #665a44; --scrollbar-thumb-color: #665a44;
+}
+body.dark-full.theme-green {
+    --accent-color: #6ee895; --accent-color-hover: #22c55e; --input-focus-border: #6ee895; --input-focus-shadow: rgba(110, 232, 149, 0.2);
+    --bg-color: #1e2f23; --header-bg: #19261d; --editor-bg: #19261d; --line-number-bg: #19261d; --line-number-color: #6a7a6f; --border-color: #2d4435; --secondary-button-bg: #2d4435; --secondary-button-hover-bg: #3c5845; --input-bg: #25382b; --input-border: #44664d; --scrollbar-thumb-color: #44664d;
+}
+body.dark-full.theme-blue {
+    --accent-color: #7ab8f7; --accent-color-hover: #3b82f6; --input-focus-border: #7ab8f7; --input-focus-shadow: rgba(122, 184, 247, 0.2);
+    --bg-color: #1e232f; --header-bg: #191d26; --editor-bg: #191d26; --line-number-bg: #191d26; --line-number-color: #6a6f7a; --border-color: #2d3544; --secondary-button-bg: #2d3544; --secondary-button-hover-bg: #3c4558; --input-bg: #252b38; --input-border: #444d66; --scrollbar-thumb-color: #444d66;
+}
+body.dark-full.theme-purple {
+    --accent-color: #b197fc; --accent-color-hover: #8b5cf6; --input-focus-border: #b197fc; --input-focus-shadow: rgba(177, 151, 252, 0.2);
+    --bg-color: #261e2f; --header-bg: #201926; --editor-bg: #201926; --line-number-bg: #201926; --line-number-color: #736a7a; --border-color: #382d44; --secondary-button-bg: #382d44; --secondary-button-hover-bg: #493c58; --input-bg: #2e2538; --input-border: #564466; --scrollbar-thumb-color: #564466;
+}
+body.dark-full .title .menu a:hover { color: var(--accent-color); }
+body.dark-full .title .menu a::after { background-color: var(--accent-color); }
+body.dark-full .toolbar button { color: #111; }
+body.dark-full .toolbar button:hover { color: #000; }
+
 .title {
-    background: linear-gradient(90deg, #e3e8ee 0%, #f0f4f8 100%);
+    background: var(--header-bg);
     padding: 18px 32px 14px 32px;
     display: flex;
-    border-bottom: 2px solid #3b82f6;
+    border-bottom: 1px solid var(--border-color);
     align-items: center;
-    box-shadow: 0 2px 8px rgba(60, 60, 60, 0.04);
-    font-family: "Noto Sans JP", sans-serif
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    font-family: "Noto Sans JP", sans-serif;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .title .title-text {
     font-family: "Noto Sans JP", sans-serif;
     flex: 1;
     font-size: 28px;
-    font-weight: 400;
-    color: #2563eb;
+    font-weight: 300;
+    color: var(--text-color);
     letter-spacing: 0.04em;
+    transition: color 0.3s;
 }
 
 .title .menu {
@@ -31,62 +144,87 @@ body {
     display: flex;
     gap: 18px;
     font-size: 16px;
-}
-
-.title .menu a {
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 400;
-    padding: 2px 8px;
-    border-radius: 0px;
-    transition: background 0.2s, color 0.2s;
-}
-
-.title .menu a:hover {
-    background: #dbeafe;
-    color: #1d4ed8;
-}
-
-.toolbar {
-    background: #f1f5f9;
-    display: flex;
-    gap: 24px;
-    padding: 14px 32px;
-    border-bottom: 1px solid #e0e7ef;
     align-items: center;
 }
 
+.title .menu a {
+    color: var(--menu-link-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 0px;
+    position: relative;
+    transition: color 0.2s;
+}
+
+.title .menu a:hover {
+    color: var(--accent-color);
+    background: none; /* 背景色変更を削除 */
+}
+
+.title .menu a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent-color);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out, background-color 0.3s;
+}
+
+.title .menu a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.toolbar {
+    background: var(--header-bg);
+    display: flex;
+    gap: 24px;
+    padding: 14px 32px;
+    border-bottom: 1px solid var(--border-color);
+    align-items: center;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
 .toolbar input[type="text"] {
-    border: 1px solid #cbd5e1;
+    border: 1px solid var(--input-border);
     border-radius: 4px;
     padding: 6px 10px;
     font-size: 15px;
-    background: #fff;
-    transition: border 0.2s;
+    background: var(--input-bg);
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.3s, color 0.3s;
     margin-right: 6px;
+    color: var(--text-color);
 }
 
 .toolbar input[type="text"]:focus {
-    border: 1.5px solid #3b82f6;
+    border-color: var(--input-focus-border);
     outline: none;
+    box-shadow: 0 0 0 3px var(--input-focus-shadow);
 }
 
 .toolbar button {
-    background: #2563eb;
-    color: #fff;
+    font-family: "Noto Sans JP", sans-serif;
+    background: var(--accent-color);
+    color: var(--button-text-color);
     border: none;
-    border-radius: 4px;
-    padding: 7px 16px;
-    font-size: 15px;
+    border-radius: 4px; /* 元のradiusに戻す */
+    padding: 7px 16px; /* 元のpaddingに戻す */
+    font-size: 15px; /* 元のサイズに戻す */
     font-weight: 500;
     cursor: pointer;
-    margin-right: 6px;
-    transition: background 0.2s, box-shadow 0.2s;
-    box-shadow: 0 1px 2px rgba(60, 60, 60, 0.04);
+    margin-right: 6px; /* 元のmarginに戻す */
+    transition: background-color 0.2s, box-shadow 0.2s, color 0.3s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .toolbar button:hover {
-    background: #1d4ed8;
+    background: var(--accent-color-hover);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
 }
 
 .toolbar input[type="file"] {
@@ -94,59 +232,67 @@ body {
 }
 
 .file-label {
-    background: #2563eb;
-    color: #fff;
-    border: none;
+    background: var(--secondary-button-bg);
+    color: var(--secondary-button-text);
+    border: 1px solid var(--secondary-button-border);
     border-radius: 4px;
     padding: 7px 16px;
     font-size: 15px;
     font-weight: 500;
     cursor: pointer;
     margin-right: 6px;
-    transition: background 0.2s, box-shadow 0.2s;
-    box-shadow: 0 1px 2px rgba(60, 60, 60, 0.04);
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     display: inline-block;
     vertical-align: middle;
     text-align: center;
 }
 
 .file-label:hover {
-    background: #1d4ed8;
+    background: var(--secondary-button-hover-bg);
+    border-color: var(--secondary-button-hover-border);
+    color: var(--secondary-button-hover-text);
 }
 
 /* ファイル名表示用 */
 #file-name-display {
     font-size: 15px;
-    color: #64748b;
+    color: var(--placeholder-color);
     margin-left: 4px;
     vertical-align: middle;
+    transition: color 0.3s;
 }
 
 .editor-container {
     display: flex;
     width: 100%;
-    height: calc(100vh - 120px);
-    background: #fff;
-    border: 1.5px solid #cbd5e1;
+    height: calc(100vh - 140px);
+    background: var(--editor-bg);
+    border: 1px solid var(--border-color);
+    border-top: none;
     border-radius: 0 0 8px 8px;
     box-sizing: border-box;
-    box-shadow: 0 2px 12px rgba(60, 60, 60, 0.06);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
     overflow: hidden;
+    margin: 0;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .line-numbers {
-    background: #f3f4f6;
-    color: #64748b;
+    background: var(--line-number-bg);
+    color: var(--line-number-color);
     font-family: monospace;
     font-size: 16px;
     padding: 12px 6px 12px 12px;
     text-align: right;
     user-select: none;
-    border-right: 1.5px solid #e0e7ef;
+    border-right: 1px solid var(--border-color);
     min-width: 38px;
     box-sizing: border-box;
     height: 100%;
     overflow: hidden;
+    line-height: 1.66;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 textarea {
@@ -154,21 +300,23 @@ textarea {
     height: 100%;
     resize: none;
     padding: 12px 16px;
-    font-family: "JetBrains Mono", "Fira Mono", "Noto Sans JP", monospace;
+    font-family: "M PLUS 1 Code", "Noto Sans JP", monospace;
     font-size: 16px;
     border: none;
     box-sizing: border-box;
     outline: none;
     background: transparent;
-    color: #222;
-    line-height: 1.7;
-    transition: background 0.2s;
+    color: var(--text-color);
+    line-height: 1.66;
+    transition: background 0.2s, color 0.3s;
+    white-space: pre;
+    overflow-wrap: normal;
 }
 
 .editor {
     width: 100%;
     background: #fff;
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 8px 8px; /* 元のradiusに戻す */
     box-shadow: none;
 }
 
@@ -179,15 +327,158 @@ textarea {
     gap: 6px;
 }
 
+/* Settings Menu */
+.settings {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#settings-button {
+    font-family: "Noto Sans JP", sans-serif;
+    background: var(--secondary-button-bg);
+    color: var(--secondary-button-text);
+    border: 1px solid var(--secondary-button-border);
+    border-radius: 4px;
+    padding: 2px 12px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+#settings-button:hover {
+    background: var(--secondary-button-hover-bg);
+    border-color: var(--secondary-button-hover-border);
+    color: var(--secondary-button-hover-text);
+}
+
+.settings-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: var(--header-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    z-index: 1000;
+    width: 220px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.settings-dropdown.show {
+    display: block;
+}
+
+.setting-section {
+    margin-bottom: 12px;
+}
+.setting-section:last-child {
+    margin-bottom: 0;
+}
+
+.setting-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    transition: color 0.3s;
+}
+
+.color-themes {
+    display: flex;
+    gap: 8px;
+}
+
+.color-option {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+.color-option.active {
+    border-color: var(--accent-color);
+}
+.color-option[data-color="white"] { background-color: #ffffff; border: 1px solid #e0e0e0; }
+.color-option[data-color="red"] { background-color: #ef4444; }
+.color-option[data-color="yellow"] { background-color: #f59e0b; }
+.color-option[data-color="green"] { background-color: #22c55e; }
+.color-option[data-color="blue"] { background-color: #3b82f6; }
+.color-option[data-color="purple"] { background-color: #8b5cf6; }
+
+.dark-mode-options {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.dark-mode-options label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--text-color);
+    transition: color 0.3s;
+}
+#dark-mode-type-container {
+    display: flex;
+    gap: 10px;
+}
+
+/* Switch toggle */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 38px;
+    height: 22px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 22px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+input:checked + .slider {
+    background-color: var(--accent-color);
+}
+input:checked + .slider:before {
+    transform: translateX(16px);
+}
+
 /* スクロールバーを細く */
 textarea::-webkit-scrollbar,
 .line-numbers::-webkit-scrollbar {
-    width: 8px;
-    background: #f1f5f9;
+    width: 8px; /* 元のwidthに戻す */
+    background: transparent; /* 背景を透明に */
 }
 
 textarea::-webkit-scrollbar-thumb,
 .line-numbers::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: var(--scrollbar-thumb-color);
     border-radius: 4px;
 }

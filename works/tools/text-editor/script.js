@@ -39,61 +39,52 @@ function loadFile() {
 // 括弧/引用符の自動補完
 // --------------------------------
 function handleAutocomplete(e) {
-    const textarea = document.getElementById('text-editor');
+    const textarea = e.target;
     const value = textarea.value;
     const selectionStart = textarea.selectionStart;
     const selectionEnd = textarea.selectionEnd;
+    const key = e.key;
+
     const pairs = {
-        '"': '"',
-        "'": "'",
-        '(': ')',
-        '[': ']',
-        '{': '}'
+        '"': '"', "'": "'", '(': ')', '[': ']', '{': '}', '`': '`'
     };
-    // 手動で閉じ括弧を入力した場合、直後が同じ括弧ならスキップ
     const closing = {
-        ')': '(',
-        ']': '[',
-        '}': '{',
-        '"': '"',
-        "'": "'"
+        ')': '(', ']': '[', '}': '{', '"': '"', "'": "'", '`': '`'
     };
-    if (e && closing[e.key]) {
-        if (value[selectionStart] === e.key) {
-            textarea.selectionStart = textarea.selectionEnd = selectionStart + 1;
-            e.preventDefault();
-            return;
-        }
-    }
-    // 開き括弧入力時の自動補完
-    if (e && pairs[e.key]) {
-        const before = value.slice(0, selectionStart);
-        const after = value.slice(selectionEnd);
-        textarea.value = before + e.key + pairs[e.key] + after;
+
+    // 手動で閉じ括弧を入力した場合、直後が同じ括弧ならカーソルを1つ進める
+    if (closing[key] && value[selectionStart] === key) {
         textarea.selectionStart = textarea.selectionEnd = selectionStart + 1;
         e.preventDefault();
+        return;
+    }
+
+    // 開き括弧入力時の自動補完
+    if (pairs[key]) {
+        e.preventDefault();
+        textarea.setRangeText(key + pairs[key], selectionStart, selectionEnd, 'end');
+        textarea.selectionStart = textarea.selectionEnd = selectionStart + 1;
     }
 }
 
 // 自動補完で挿入された閉じ括弧の直後でBackspaceを押した場合、両方削除
 function handleBackspace(e) {
-    const textarea = document.getElementById('text-editor');
+    const textarea = e.target;
     const value = textarea.value;
     const pos = textarea.selectionStart;
+
+    // 選択範囲がない場合のみ
+    if (textarea.selectionStart !== textarea.selectionEnd) return;
+
     if (pos > 0 && pos < value.length) {
         const prev = value[pos - 1];
         const next = value[pos];
         const pairs = {
-            '(': ')',
-            '[': ']',
-            '{': '}',
-            '"': '"',
-            "'": "'"
+            '(': ')', '[': ']', '{': '}', '"': '"', "'": "'", '`': '`'
         };
-        if (pairs[prev] && pairs[prev] === next) {
-            textarea.value = value.slice(0, pos - 1) + value.slice(pos + 1);
-            textarea.selectionStart = textarea.selectionEnd = pos - 1;
+        if (pairs[prev] === next) {
             e.preventDefault();
+            textarea.setRangeText('', pos - 1, pos + 1, 'end');
         }
     }
 }
@@ -102,22 +93,35 @@ function handleBackspace(e) {
 // インデント保持
 // --------------------------------
 function handleIndent(e) {
-    if (e.key !== 'Enter') return;
-    const textarea = document.getElementById('text-editor');
-    const value = textarea.value;
-    const selectionStart = textarea.selectionStart;
-    // 直前の行を取得
-    const before = value.slice(0, selectionStart);
-    const lastLineBreak = before.lastIndexOf('\n');
-    const prevLine = before.slice(lastLineBreak + 1);
-    // 行頭の空白・タブを取得
-    const indent = prevLine.match(/^[ \t]*/)[0];
-    // デフォルトの改行をキャンセルし、インデント付きで挿入
-    e.preventDefault();
-    const after = value.slice(selectionStart);
-    const insert = '\n' + indent;
-    textarea.value = before + insert + after;
-    textarea.selectionStart = textarea.selectionEnd = selectionStart + insert.length;
+	if (e.key !== 'Enter') return;
+	const textarea = e.target;
+	const value = textarea.value;
+	const selectionStart = textarea.selectionStart;
+	// 直前の行を取得
+	const before = value.slice(0, selectionStart);
+	const lastLineBreak = before.lastIndexOf('\n');
+	const prevLine = before.slice(lastLineBreak + 1);
+	// 行頭の空白・タブを取得
+	const indent = prevLine.match(/^[ \t]*/)[0];
+
+	// 追加処理: 直前が '{' で直後が '}' の場合、ブロックを挿入してカーソルを中に置く
+	const after = value.slice(selectionStart);
+	const prevChar = before[before.length - 1];
+	const nextChar = after[0];
+	if (prevChar === '{' && nextChar === '}') {
+		e.preventDefault();
+		const innerIndent = indent + '    '; // スペース4つ
+		const insert = '\n' + innerIndent + '\n' + indent;
+		textarea.setRangeText(insert, selectionStart, selectionStart, 'end');
+		textarea.selectionStart = textarea.selectionEnd = selectionStart + 1 + innerIndent.length;
+		return;
+	}
+
+	// デフォルトの改行をキャンセルし、インデント付きで挿入
+	e.preventDefault();
+	const insert = '\n' + indent;
+	textarea.setRangeText(insert, selectionStart, selectionStart, 'end');
+	textarea.selectionStart = textarea.selectionEnd = selectionStart + insert.length;
 }
 
 // 行番号の更新
@@ -184,7 +188,7 @@ function replaceAllText() {
     const value = textarea.value;
     const newValue = value.split(search).join(replace);
     textarea.value = newValue;
-    updateLineNumbers();
+    // updateLineNumbersはinputイベントで発火するため、ここでは不要
 }
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -194,22 +198,23 @@ window.addEventListener('DOMContentLoaded', function () {
         document.getElementById('line-numbers').scrollTop = textarea.scrollTop;
     });
     updateLineNumbers();
+
     textarea.addEventListener('keydown', function (e) {
-        // 括弧/引用符の自動補完とスキップ
-        const allBrackets = ['(', '[', '{', '"', "'", ')', ']', '}'];
-        if (allBrackets.includes(e.key)) {
+        const key = e.key;
+        const allBrackets = ['(', '[', '{', '"', "'", '`', ')', ']', '}'];
+
+        if (allBrackets.includes(key)) {
             handleAutocomplete(e);
-        }
-        // Backspaceで自動補完括弧を同時削除
-        if (e.key === 'Backspace') {
+        } else if (key === 'Backspace') {
             handleBackspace(e);
-        }
-        // インデント保持
-        if (e.key === 'Enter') {
+        } else if (key === 'Enter') {
             handleIndent(e);
-            updateLineNumbers();
+            // handleIndentがDOMを変更した直後にupdateLineNumbersを呼び出す
+            // setTimeoutで、DOM更新後の再描画サイクルで実行させる
+            setTimeout(updateLineNumbers, 0);
         }
     });
+
     // ファイル名表示
     const fileInput = document.getElementById('load-file');
     const fileNameDisplay = document.getElementById('file-name-display');
