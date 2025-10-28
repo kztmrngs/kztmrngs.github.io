@@ -13,6 +13,23 @@
         <meta property="og:image" content="https://kztmrngs.github.io/favicon.ico">
         <meta name="twitter:card" content="summary">
         <title>風止渚のホームページ</title>
+        <script>
+            (function() {
+                try {
+                    var theme = localStorage.getItem('theme');
+                    if (!theme) {
+                        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                            theme = 'dark';
+                        } else {
+                            theme = 'light';
+                        }
+                    }
+                    document.documentElement.setAttribute('data-theme', theme);
+                } catch (e) {
+                    // 無視して続行
+                }
+            })();
+        </script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
