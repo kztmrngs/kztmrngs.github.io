@@ -1,4 +1,7 @@
-/* テーマ全体で利用する色を変数として定義します */
+/*
+ * --- Theme Variables ---
+ * テーマ全体で利用する色や影を変数として定義
+ */
 :root {
     --color-surface: #f3f3f3;
     --color-border: #ccc;
@@ -8,27 +11,31 @@
     --color-primary-dark: #005fcc;
     --color-divider: #000;
     --color-white: #fff;
-    /* リンクの色を専用の変数として切り出します */
+    /* リンクの色 */
     --color-link: var(--color-primary);
     --color-link-active: var(--color-primary-dark);
-    /* マテリアルデザイン風のシャドウを定義します */
-    --shadow-elevation-1: 0 0 4px rgba(0,0,0,0.15), 0 0 4px rgba(0,0,0,0.25); /* 影のオフセットを削除し中央配置 */
+    /* マテリアルデザイン風のシャドウ */
+    --shadow-elevation-1: 0 0 4px rgba(0,0,0,0.15), 0 0 4px rgba(0,0,0,0.25);
 }
 
-/* JavaScriptからdata-theme="dark"が指定された際に、変数の値を上書きします */
+/* ダークモードのカラー変数 */
 [data-theme="dark"] {
     --color-surface: #232323;
     --color-border: #444;
     --color-bg: #2c2c2c;
     --color-text: #f3f3f3;
     --color-divider: #444;
-    /* ダークモードでは、元の設計通り明るい色（#f3f3f3）をリンク色に設定します */
+    /* ダークモードではリンク色を明るくする */
     --color-link: #f3f3f3;
     --color-link-active: #b5b5b5;
-    /* ダークモード用のシャドウを定義します */
-    --shadow-elevation-1: 0 0 4px rgba(0,0,0,0.4), 0 0 4px rgba(0,0,0,0.6); /* 暗い背景に馴染むように調整し、影のオフセットを削除 */
+    /* ダークモード用のシャドウ */
+    --shadow-elevation-1: 0 0 4px rgba(0,0,0,0.4), 0 0 4px rgba(0,0,0,0.6);
 }
 
+/*
+ * --- Base Styles ---
+ * 基本的なHTML要素のスタイル
+ */
 html, body {
     height: 100%;
     margin: 0;
@@ -47,11 +54,38 @@ body {
     flex-direction: column;
 }
 
-/* main要素が利用可能な高さいっぱいに広がるように設定します */
-main {
-    flex: 1;
+/*
+ * --- Layout Elements ---
+ * ヘッダー、メインコンテンツ、フッターのレイアウト
+ */
+header {
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: 1rem;
+    display: flex;
+    box-shadow: var(--shadow-elevation-1);
+    border-radius: 0 0 0.5rem 0.5rem; /* 下部に丸み */
 }
 
+/* main要素が利用可能な高さいっぱいに広がるように設定 */
+main {
+    flex: 1;
+    padding: 1rem;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    box-shadow: var(--shadow-elevation-1);
+    border-radius: 0.5rem 0.5rem 0 0; /* 上部に丸み */
+}
+
+/*
+ * --- Typography & Content Elements ---
+ * 見出し、段落、画像などのスタイル
+ */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     margin: 0.25em 0;
@@ -66,27 +100,14 @@ p {
     margin: 0;
 }
 
-/* 画像が親要素の幅を超えないように、また高さが自動調整されるようにします */
+/* 画像が親要素の幅を超えないようにし、シャドウを適用 */
 img {
     max-width: 100%;
     height: auto;
-    box-shadow: var(--shadow-elevation-1); /* すべてのimgタグにシャドウを追加 */
-}
-
-.screenshot {
-    max-width: 70%;
-}
-
-.mini-screenshot {
-    max-width: 50%;
-}
-
-.micro-screenshot {
-    max-width: 30%;
+    box-shadow: var(--shadow-elevation-1);
 }
 
 a {
-    /* テーマに応じて変化するリンク専用の変数を適用します */
     color: var(--color-link);
 }
 
@@ -121,28 +142,32 @@ pre {
     white-space: pre;
     overflow-x: auto;
 }
-header {
-    background-color: var(--color-surface);
-    border-bottom: 1px solid var(--color-border);
-    padding: 1rem;
-    display: flex;
-    box-shadow: var(--shadow-elevation-1); /* シャドウを追加 */
-    border-radius: 0 0 0.5rem 0.5rem; /* 下部に丸みを追加 */
+
+/*
+ * --- ID Styles ---
+ * IDセレクタで指定する固有の要素のスタイル
+ */
+#theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.3em;
+    cursor: pointer;
+    transition: color 0.2s;
+    color: inherit;
+    outline: none;
 }
 
-main {
-    padding: 1rem;
+/* キーボード操作時のフォーカスを視覚的に示す */
+#theme-toggle:focus {
+    outline: 2px solid var(--color-primary);
 }
 
-footer {
-    text-align: center;
-    padding: 1rem 0;
-    background-color: var(--color-surface);
-    border-top: 1px solid var(--color-border);
-    box-shadow: var(--shadow-elevation-1); /* シャドウを追加 */
-    border-radius: 0.5rem 0.5rem 0 0; /* 上部に丸みを追加 */
-}
+/*
+ * --- Class Styles ---
+ * クラスセレクタで指定する再利用可能なコンポーネントのスタイル
+ */
 
+/* サイトタイトル */
 .title {
     line-height: 1.2;
     border-left: 0.1rem solid var(--color-text);
@@ -156,6 +181,11 @@ footer {
     margin: 0;
 }
 
+a.title {
+    color: var(--color-text);
+}
+
+/* ナビゲーションメニュー */
 .menu {
     display: flex;
     margin: auto 0;
@@ -163,20 +193,7 @@ footer {
     padding: 1rem;
 }
 
-a.title {
-    color: var(--color-text);
-}
-
-#theme-toggle {
-    background: none;
-    border: none;
-    font-size: 1.3em;
-    cursor: pointer;
-    transition: color 0.2s;
-    color: inherit;
-    outline: none;
-}
-
+/* ブログ記事の日付 */
 .blog-date {
     color: var(--color-text);
     opacity: 0.7;
@@ -185,24 +202,34 @@ a.title {
     border-bottom: 1px solid var(--color-border);
 }
 
-/* キーボード操作によるフォーカスを視覚的に分かりやすく示します */
-#theme-toggle:focus {
-    outline: 2px solid var(--color-primary);
+/* スクリーンショット画像 */
+.screenshot {
+    max-width: 70%;
 }
 
+.mini-screenshot {
+    max-width: 50%;
+}
+
+.micro-screenshot {
+    max-width: 30%;
+}
+
+/* テーマ切り替えトグルスイッチ */
 .toggle-switch {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
-    /* 意図しないテキスト選択を防ぎ、UIとしての操作性を向上させます */
+    /* 意図しないテキスト選択を防止 */
     user-select: none;
 }
 
-/* HTML上のチェックボックスを非表示にしつつ、機能（チェック状態）は維持します */
+/* HTML上のチェックボックスを非表示にする */
 .toggle-switch input[type="checkbox"] {
     display: none;
 }
 
+/* トグルスイッチのスライダー部分 */
 .toggle-switch .slider {
     width: 36px;
     height: 20px;
@@ -214,7 +241,7 @@ a.title {
     box-sizing: border-box;
 }
 
-/* スライダー内の円（つまみ）を疑似要素として描画します */
+/* トグルスイッチのつまみ */
 .toggle-switch .slider::before {
     content: "";
     position: absolute;
@@ -227,12 +254,12 @@ a.title {
     transition: transform 0.2s;
 }
 
-/* チェックボックスがオンの時に、隣接するスライダーの背景色を変更します */
+/* チェック時にスライダーの背景色を変更 */
 .toggle-switch input[type="checkbox"]:checked + .slider {
     background: var(--color-primary);
 }
 
-/* チェックボックスがオンの時に、つまみを右に移動させます */
+/* チェック時につまみを右に移動 */
 .toggle-switch input[type="checkbox"]:checked + .slider::before {
     transform: translateX(16px);
 }
@@ -243,7 +270,10 @@ a.title {
     margin-left: 0.2em;
 }
 
-/* スマートフォンなどの狭い画面幅に対応するためのレイアウト調整です */
+/*
+ * --- Media Queries ---
+ * レスポンシブデザインのためのスタイル
+ */
 @media (max-width: 640px) {
     header {
         flex-direction: column;
