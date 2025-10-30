@@ -274,7 +274,7 @@ a.title {
  * --- Media Queries ---
  * レスポンシブデザインのためのスタイル
  */
-@media (max-width: 640px) {
+@media (max-width: 680px) {
     header {
         flex-direction: column;
     }
