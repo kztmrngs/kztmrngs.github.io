@@ -3,9 +3,9 @@
  * テーマ全体で利用する色や影を変数として定義
  */
 :root {
-    --color-surface: #f3f3f3;
+    --color-surface: #fcfcfc;
     --color-border: #ccc;
-    --color-bg: #f8f8f8;
+    --color-bg: #ffffff;
     --color-text: #000;
     --color-primary: #007fff;
     --color-primary-dark: #005fcc;
