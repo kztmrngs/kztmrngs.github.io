@@ -1,3 +1,4 @@
+//  --- DOMContentLoadedイベントでヘッダーとフッターの読み込みとテーマ初期化を実行 ---
 document.addEventListener('DOMContentLoaded', () => {
     // ヘッダーとフッターの読み込み
     loadHeaderFooter().then(() => {
@@ -31,7 +32,7 @@ function loadHeaderFooter() {
     ]);
 }
 
-// テーマ（ダークモード/ライトモード）切り替え初期化関数
+// --- テーマ（ダークモード/ライトモード）切り替え初期化関数 ---
 function initTheme() {
     const toggle = document.getElementById('theme-toggle');
     const icon = document.querySelector('.toggle-switch .toggle-icon');
@@ -57,3 +58,36 @@ function initTheme() {
         });
     }
 }
+
+
+// --- 隠しコード ---
+// クワイン関数
+function quine(insert = "Hello!") {
+  const code = `function quine(insert = ${JSON.stringify(insert)}) {
+  const code = \${JSON.stringify(code)};
+  console.log(code.replace(/\$\{JSON\.stringify\(code\)\}/, JSON.stringify(code)));
+}
+quine(${JSON.stringify(insert)});`;
+  console.log(code.replace(/\$\{JSON\.stringify\(code\)\}/, JSON.stringify(code)));
+}
+// quine("任意文字列をここに入れられるよ！");
+// じゃんけん関数
+function janken(userChoice) {
+  const choices = ['グー', 'チョキ', 'パー'];
+  const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+  let result = '';
+  if (userChoice === computerChoice) {
+    result = '引き分け！';
+  } else if (
+    (userChoice === 'グー' && computerChoice === 'チョキ') ||
+    (userChoice === 'チョキ' && computerChoice === 'パー') ||
+    (userChoice === 'パー' && computerChoice === 'グー')
+  ) {
+    result = 'あなたの勝ち！';
+  } else {
+    result = 'コンピュータの勝ち！';
+  }
+  console.log(`あなたの選択: ${userChoice}, コンピュータの選択: ${computerChoice} → ${result}`);
+}
+// janken('グー'); // 'グー', 'チョキ', 'パー'のいずれかを引数にして実行
+// --- ここまで隠しコード ---
