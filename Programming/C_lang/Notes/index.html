@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="風止渚のホームページ">
+        <meta name="author" content="風止渚">
+        <title>風止渚のホームページ</title>
+        <script>
+            (function() {
+                try {
+                    var theme = localStorage.getItem('theme');
+                    if (!theme) {
+                        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                            theme = 'dark';
+                        } else {
+                            theme = 'light';
+                        }
+                    }
+                    document.documentElement.setAttribute('data-theme', theme);
+                } catch (e) {
+                    // 無視して続行
+                }
+            })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script src="/script.js" defer></script>
+    </head>
+    <body>
+        <header id="header-placeholder"></header>
+        <main>
+            <h1>C言語ノート</h1>
+            <a href="../">C言語の勉強録に戻る</a>
+            <h2>ノート一覧</h2>
+            <ul>
+                <li>
+                    <a href="./Basics/">基礎編</a>
+                    <ul>
+                        <li><a href="./Basics/DataTypes/">データ型</a></li>
+                        <li><a href="./Basics/Operators/">演算子</a></li>
+                        <li><a href="./Basics/ControlFlow/">制御フロー</a></li>
+                        <li><a href="./Basics/Functions/">関数</a></li>
+                        <li><a href="./Basics/IO/">入出力</a></li>
+                        <li><a href="./Basics/Preprocessor/">プリプロセッサ</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="./PointersMem/">ポインタとメモリ管理</a>
+                    <ul>
+                        <li><a href="./PointersMem/Pointers/">ポインタ</a></li>
+                        <li><a href="./PointersMem/Arrays/">配列</a></li>
+                        <li><a href="./PointersMem/Strings/">文字列</a></li>
+                        <li><a href="./PointersMem/DynamicMem/">動的メモリ</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="./DataStructsIO/">データ構造と入出力</a>
+                    <ul>
+                        <li><a href="./DataStructsIO/StructsUnions/">構造体と共用体</a></li>
+                        <li><a href="./DataStructsIO/FileIO/">ファイル入出力</a></li>
+                    </ul>
+                </li>
+                <li><a href="./AdvancedTopics/">応用トピック</a></li>
+            </ul>
+        </main>
+        <footer id="footer-placeholder"></footer>
+    </body>
+</html>
