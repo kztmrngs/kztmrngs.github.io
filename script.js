@@ -59,6 +59,48 @@ function initTheme() {
     }
 }
 
+// --- コードブロックのインデント調整処理 ---
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre.code-block').forEach(element => {
+        const text = element.textContent;
+        let lines = text.split('\n');
+
+        // 先頭の空行（または空白のみの行）を削除
+        while (lines.length > 0 && lines[0].trim().length === 0) {
+            lines.shift();
+        }
+
+        // 末尾の空行（または空白のみの行）を削除
+        while (lines.length > 0 && lines[lines.length - 1].trim().length === 0) {
+            lines.pop();
+        }
+
+        // すべての行が空になった場合は、コンテンツを空にして終了
+        if (lines.length === 0) {
+            element.textContent = '';
+            return;
+        }
+
+        // 最初のコード行のインデントを共通のインデントとして特定
+        // これにより、HTML構造に起因する全体のインデントを削除できる
+        let commonIndent = 0;
+        const firstLine = lines[0];
+        const leadingWhitespaceMatch = firstLine.match(/^\s*/);
+        if (leadingWhitespaceMatch) {
+            commonIndent = leadingWhitespaceMatch[0].length;
+        }
+
+        // 各行から共通のインデントを削除
+        const dedentedLines = lines.map(line => {
+            if (line.length >= commonIndent) {
+                return line.substring(commonIndent);
+            }
+            return line; // 共通のインデントよりも短い行はそのままにする
+        });
+
+        element.textContent = dedentedLines.join('\n');
+    });
+});
 
 // --- 隠しコード ---
 // クワイン関数
