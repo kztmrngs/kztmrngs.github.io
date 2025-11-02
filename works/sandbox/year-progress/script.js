@@ -6,10 +6,10 @@ function updateYearProgress() {
     const year = now.getFullYear();
 
     // 1. 現在の日付を表示
-    const dateOptions = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
-    const dateElement = document.getElementById('date');
+    const dateOptions = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo', hour12: false};
+    const dateElement = document.getElementById('date-time');
     if (dateElement) {
-        dateElement.textContent = now.toLocaleDateString('ja-JP', dateOptions);
+        dateElement.textContent = now.toLocaleString('ja-JP', dateOptions);
     }
 
     // 2. 年の進捗を計算
