@@ -102,6 +102,124 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// インライン暗号化コードのエンコーダーとデコーダー
+const LZW = {
+    compress: function (uncompressed) {
+        let dictionary = {};
+        for (let i = 0; i < 256; i++) {
+            dictionary[String.fromCharCode(i)] = i;
+        }
+
+        let word = "";
+        let result = [];
+        let dictSize = 256;
+
+        for (let i = 0, len = uncompressed.length; i < len; i++) {
+            let currentChar = uncompressed[i];
+            let wordAndChar = word + currentChar;
+
+            if (dictionary.hasOwnProperty(wordAndChar)) {
+                word = wordAndChar;
+            } else {
+                result.push(dictionary[word]);
+                dictionary[wordAndChar] = dictSize++;
+                word = currentChar;
+            }
+        }
+
+        if (word !== "") {
+            result.push(dictionary[word]);
+        }
+        return result;
+    },
+
+    decompress: function (compressed) {
+        let dictionary = {};
+        for (let i = 0; i < 256; i++) {
+            dictionary[i] = String.fromCharCode(i);
+        }
+
+        let word = String.fromCharCode(compressed[0]);
+        let result = word;
+        let entry = "";
+        let dictSize = 256;
+
+        for (let i = 1, len = compressed.length; i < len; i++) {
+            let k = compressed[i];
+            if (dictionary[k]) {
+                entry = dictionary[k];
+            } else {
+                if (k === dictSize) {
+                    entry = word + word[0];
+                } else {
+                    return null; // Error
+                }
+            }
+
+            result += entry;
+            dictionary[dictSize++] = word + entry[0];
+            word = entry;
+        }
+        return result;
+    }
+};
+
+// --- エンコーダー関数 ---
+function lzwEncode(inputString) {
+    // 1. 文字列を2進数文字列に変換
+    let binaryString = '';
+    for (let i = 0; i < inputString.length; i++) {
+        let bin = inputString[i].charCodeAt(0).toString(2);
+        binaryString += '0'.repeat(8 - bin.length) + bin; // 8ビットにパディング
+    }
+
+    // 2. LZWで圧縮
+    const compressed = LZW.compress(binaryString);
+
+    // 3. 圧縮データを16ビットの2進数文字列に変換
+    let compressedBinary = '';
+    for (const code of compressed) {
+        let bin = code.toString(2);
+        compressedBinary += '0'.repeat(16 - bin.length) + bin; // 16ビットにパディング
+    }
+
+    // 4. 0をスペース、1をタブに変換
+    return compressedBinary.replace(/0/g, ' ').replace(/1/g, '\t');
+}
+
+// --- デコーダー関数 ---
+function lzwDecode(encodedString) {
+    // 1. スペースとタブを0と1に戻す
+    const compressedBinary = encodedString.replace(/ /g, '0').replace(/\t/g, '1');
+
+    // 2. 16ビットごとに区切り、数値の配列に変換
+    let compressed = [];
+    for (let i = 0; i < compressedBinary.length; i += 16) {
+        const chunk = compressedBinary.substring(i, i + 16);
+        if(chunk.length === 16) {
+            compressed.push(parseInt(chunk, 2));
+        }
+    }
+
+    // 3. LZWで解凍
+    const decompressedBinary = LZW.decompress(compressed);
+    if (decompressedBinary === null) return "デコードに失敗しました。";
+
+
+    // 4. 2進数文字列を元の文字列に変換
+    let outputString = '';
+    for (let i = 0; i < decompressedBinary.length; i += 8) {
+        const byte = decompressedBinary.substring(i, i + 8);
+        if (byte.length === 8) {
+            outputString += String.fromCharCode(parseInt(byte, 2));
+        }
+    }
+
+    return outputString;
+}
+
+
+
 // --- 隠しコード ---
 // クワイン関数
 function quine(insert = "Hello!") {
