@@ -5,47 +5,331 @@
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://kztmrngs.github.io/works/</loc>
+        <loc>https://kztmrngs.github.io/Programming/</loc>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://kztmrngs.github.io/blog/</loc>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/terms.html</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/works/</loc>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/blog/algorithm/quicksort.html</loc>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://kztmrngs.github.io/blog/atcoder/</loc>
-        <priority>0.7</priority>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/blog/aviutl/</loc>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://kztmrngs.github.io/blog/nikki/</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/blog/scratch/</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/blog/sushida/</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/works/games/</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/works/sandbox/</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/works/software/</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/works/tools/</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Projects/</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Projects/</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/blog/aviutl/memoryErrorImageSize.html</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/blog/nikki/2025-08/0801.html</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/blog/nikki/2025-09/0914.html</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/blog/nikki/2025-09/</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/blog/scratch/Project-3D/0001.html</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/blog/scratch/trifill/fastestTriFill.html</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/blog/sushida/2025/10/05.html</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/blog/sushida/2025/10/</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/works/sandbox/dp-image/</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/works/sandbox/html-sand/test1.html</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/works/sandbox/svgs/</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/works/sandbox/year-progress/</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/works/software/crun/</loc>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://kztmrngs.github.io/works/tools/character-count/</loc>
-        <priority>0.6</priority>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://kztmrngs.github.io/works/tools/diff/</loc>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://kztmrngs.github.io/works/tools/pass-gene/</loc>
-        <priority>0.6</priority>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://kztmrngs.github.io/works/tools/img-quality-evaluation/</loc>
-        <priority>0.6</priority>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/works/tools/kyosuu-keisann/</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/works/tools/pass-gene/</loc>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://kztmrngs.github.io/works/tools/prime-factorization/</loc>
-        <priority>0.6</priority>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://kztmrngs.github.io/works/tools/text-editor/</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/AdvancedTopics/</loc>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://kztmrngs.github.io/terms.html</loc>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/Basics/</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/DataStructsIO/</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/PointersMem/</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Projects/Hello_World/</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/AdvancedTopics/</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/Basics/</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/ModernCpp/</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/OOP/</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/TemplatesSTL/</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/Basics/ControlFlow/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/Basics/DataTypes/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/Basics/Functions/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/Basics/IO/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/Basics/Operators/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/Basics/Preprocessor/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/DataStructsIO/FileIO/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/DataStructsIO/StructsUnions/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/PointersMem/Arrays/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/PointersMem/DynamicMem/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/PointersMem/Pointers/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/C_lang/Notes/PointersMem/Strings/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/Basics/FuncOverload/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/Basics/IOStreams/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/Basics/Namespaces/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/Basics/References/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/Basics/TypeCasting/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/ModernCpp/Concurrency/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/ModernCpp/Exceptions/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/ModernCpp/Lambdas/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/ModernCpp/MoveSemantics/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/ModernCpp/SmartPointers/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/OOP/AccessSpec/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/OOP/ClassesObjs/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/OOP/CtorDtor/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/OOP/Inheritance/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/OOP/Polymorphism/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/TemplatesSTL/Algorithms/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/TemplatesSTL/ClassTemplates/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/TemplatesSTL/Containers/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/TemplatesSTL/FuncTemplates/</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://kztmrngs.github.io/Programming/CPP/Notes/TemplatesSTL/Iterators/</loc>
         <priority>0.5</priority>
     </url>
 </urlset>
