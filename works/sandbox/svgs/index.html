@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="風止渚のホームページ">
+        <meta name="author" content="風止渚">
+        <title>風止渚のホームページ</title>
+        <script>
+            (function() {
+                try {
+                    var theme = localStorage.getItem('theme');
+                    if (!theme) {
+                        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                            theme = 'dark';
+                        } else {
+                            theme = 'light';
+                        }
+                    }
+                    document.documentElement.setAttribute('data-theme', theme);
+                } catch (e) {
+                    // 無視して続行
+                }
+            })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script src="/script.js" defer></script>
+    </head>
+    <body>
+        <header id="header-placeholder"></header>
+        <main>
+            <p>ここにはブラウザで表示できるコンテンツがありません。</p>
+            <a href="/">ホームに戻る</a>|<a href="https://github.com/kztmrngs/kztmrngs.github.io/tree/main/works/sandbox/svgs/">リポジトリ(ここからなら表示できます)</a>
+            <p>まあ、404にするもんでもないなって思ったので作成。</p>
+            <p>よかったらリポジトリの方からsvg見てってください。</p>
+            <p>...ところで、なんでこのページ開いてるの？リンクしてないのに...あ、もしかしてリポジトリの方から飛んできたのかな？</p>
+            <p>じゃあサプライズあるから探してみてね！</p>
+            <!--
+            やあ、サプライズだよ！
+            適当にいつも使ってる環境教えるよ！
+            エディタ: Visual Studio Code
+            フォント: M PLUS 1 Code
+            ターミナル: node
+            OS: WSL2 (Debian13 on Windows11)
+            PC: 普通のノーパソ(改造済み)
+            CPU: AMD Ryzen7 7730U
+            メモリ: 32GB
+            SSD: 2TB(1.86TiB) NVMe(Windowsに1.54TiB、WSLに320GiB割り当て)
+            画面1: 15.6インチ FHD(1920x1080) IPS 液晶 60Hz(なんとOCで108Hz出せる！)
+            画面2: 21.5インチ FHD(1920x1080) IPS 液晶 60Hz(こっちは72Hzまでしか出せない...)
+            キーボード: パタパタの薄いやつ！
+            タッチパッド: ノーパソのやつ！
+            5ボタンマウスが欲しい！
+            こんな感じかな？
+            またね！
+            -->
+        </main>
+        <footer id="footer-placeholder"></footer>
+    </body>
+</html>
