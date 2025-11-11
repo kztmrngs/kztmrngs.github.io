@@ -1,3 +1,7 @@
+@font-face {
+    font-family: "Local Noto Sans JP";
+    src: local("Noto Sans JP");
+}
 /*
  * --- Theme Variables ---
  * テーマ全体で利用する色や影を変数として定義
@@ -53,7 +57,7 @@ html, body {
 }
 
 body {
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: "Local Noto Sans JP", "Noto Sans JP", sans-serif;
     line-height: 1.9;
     min-height: 100vh;
     display: flex;
