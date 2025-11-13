@@ -1,3 +1,7 @@
+/*
+* --- Font Face ---
+* ローカルにインストールされたNoto Sans JPフォントを優先的に使用
+*/
 @font-face {
     font-family: "Local Noto Sans JP";
     src: local("Noto Sans JP");
