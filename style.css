@@ -54,7 +54,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out !important;
     font-size: 14px;
     background-color: var(--color-bg);
     color: var(--color-text);
