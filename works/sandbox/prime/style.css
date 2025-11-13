@@ -1,0 +1,76 @@
+html, body {
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    text-shadow: 0px 0px 4px #00000033;
+}
+header {
+    margin: 1.5rem 2rem;
+    /* border-left removed here; using ::before for blur/shadow */
+    padding-left: 0.5rem;
+    position: relative;
+}
+header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0.25rem;
+    background: #007fff;/* 実線の色 */
+    z-index: 1; /* 実線を上に出す */
+    pointer-events: none;
+}
+header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0.25rem;
+    background: #007fff33;
+    filter: blur(4px); /* ぼかしを強める */
+    opacity: 1; /* 見えやすく調整 */
+    z-index: 0;
+    pointer-events: none;
+}
+main {
+    margin: 1.5rem 2rem;
+}
+h1 {
+    font-weight: 300;
+    margin: 0;
+}
+input[type="number"] {
+    width: 7rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    text-align: right;
+}
+button {
+    background-color: #007fff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    box-shadow: 0 0 4px #007fff33;
+}
+button:hover {
+    background-color: #0065cc;
+}
+a {
+    color: #0065cc;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}

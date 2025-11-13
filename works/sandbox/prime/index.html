@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>最速エラトステネスの篩</title>
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+        <script src="./script.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <h1>最速エラトステネスの篩</h1>
+        </header>
+        <main>
+            <p>エラトステネスの篩を用いて、指定された上限までの素数を高速に列挙します。</p>
+            <label for="limit-input">上限値:</label>
+            <input type="number" id="limit-input" value="1000000" min="2" />
+            <button id="generate-button">素数を生成</button>
+            <small>※一覧の表示は上限 1,000,000 を超える場合には行わず、ダウンロードで提供します。</small>
+            <h2>結果:</h2>
+            <p id="time"></p>
+            <!-- 追加: 素数の個数表示 -->
+            <p id="count"></p>
+            <!-- 追加: 素数一覧表示 -->
+            <pre id="results" style="white-space: pre-wrap; word-wrap: break-word; max-height: 40vh; overflow: auto; background: #fff6; padding: 0.5rem; border-radius: 4px;"></pre>
+            <!-- 追加: ダウンロードボタン -->
+            <button id="download-button" disabled>結果をダウンロード</button>
+        
+        </main>
+        <footer>
+            <p>&copy; 2025~ 風止渚 | <a href="/">ホーム</a></p>
+        </footer>
+    </body>
+</html>
