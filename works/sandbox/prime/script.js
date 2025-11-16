@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const bit_masks = residues.map(r => ~(1 << res_map[r]));
 
     // --- 複合プリシーブパターンの事前計算 ---
-    const PRESIEVE_PRIMES = [7, 11, 13];
-    const LCM = 7 * 11 * 13; // 1001
+    const PRESIEVE_PRIMES = [7, 11, 13, 17, 19];
+    const LCM = 7 * 11 * 13 * 17 * 19; // 323323
     const combined_pattern = new Uint8Array(LCM);
     combined_pattern.fill(255);
 
@@ -49,25 +49,77 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Step 1: sqrt(limit)までの素数を生成
-    const baseSieve = new Uint8Array(sqrtLimit + 1);
-    baseSieve.fill(1);
-    for (let p = 2; p * p <= sqrtLimit; p++) {
-        if (baseSieve[p]) {
-            for (let i = p * p; i <= sqrtLimit; i += p) baseSieve[i] = 0;
-        }
-    }
+    // Step 1: sqrt(limit)までの素数を生成 (ホイール最適化版)
     const primes_base = [];
-    for (let p = 7; p <= sqrtLimit; p++) {
-        if (baseSieve[p]) primes_base.push(p);
+    if (sqrtLimit >= 7) {
+        const ssqrtLimit = (Math.sqrt(sqrtLimit)) | 0;
+
+        // ssqrtLimitまでの素数を単純なふるいで生成
+        const ssqrtSieve = new Uint8Array(ssqrtLimit + 1);
+        ssqrtSieve.fill(1);
+        ssqrtSieve[0] = ssqrtSieve[1] = 0;
+        for (let p = 2; p * p <= ssqrtLimit; p++) {
+            if (ssqrtSieve[p]) {
+                for (let i = p * p; i <= ssqrtLimit; i += p) ssqrtSieve[i] = 0;
+            }
+        }
+        
+        const sievingPrimesForBase = [];
+        for (let p = 7; p <= ssqrtLimit; p++) {
+            if (ssqrtSieve[p]) {
+                sievingPrimesForBase.push(p);
+            }
+        }
+
+        // sqrtLimitまでをホイールふるいで処理
+        const baseWheelSieveSize = ((sqrtLimit / 30) | 0) + 1;
+        const baseWheelSieve = new Uint8Array(baseWheelSieveSize);
+        baseWheelSieve.fill(255);
+
+        for (const p of sievingPrimesForBase) {
+            const p_res = p % 30;
+            for (const r of residues) {
+                const start_num = p * r;
+                if (start_num > sqrtLimit) break;
+
+                const pr_mod_30 = (p_res * r) % 30;
+                const res_idx = res_map[pr_mod_30];
+                if (res_idx === undefined) continue;
+
+                let q = (start_num / 30) | 0;
+                for (; q < baseWheelSieveSize; q += p) {
+                    baseWheelSieve[q] &= bit_masks[res_idx];
+                }
+            }
+        }
+
+        // ふるい結果からprimes_baseを構築
+        primes_base.push(...sievingPrimesForBase);
+        
+        const start_q = (ssqrtLimit > 0) ? ((ssqrtLimit / 30) | 0) : 0;
+        for (let q = start_q; q < baseWheelSieveSize; q++) {
+            const bits = baseWheelSieve[q];
+            if (bits === 0) continue;
+
+            for (let k = 0; k < 8; k++) {
+                if ((bits & (1 << k)) !== 0) {
+                    const n = 30 * q + residues[k];
+                    if (n > ssqrtLimit && n <= sqrtLimit) {
+                         primes_base.push(n);
+                    }
+                }
+            }
+        }
+        // sievingPrimesForBaseはソート済み、以降に追加されるnも昇順のため、最終的なソートは不要
     }
+
     for (const p of primes_base) {
         primes.push(p);
     }
 
     // Step 2: セグメントごとに篩う
     let low = 0;
-    const sieving_primes = primes_base.filter(p => p > 13);
+    const sieving_primes = primes_base.filter(p => p > 19);
 
     while (low <= limit) {
         const high = Math.min(low + SEGMENT_RANGE - 1, limit);
