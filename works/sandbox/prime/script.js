@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   genBtn.addEventListener('click', () => {
-    const requested = (Number(limitInput.value) || 0) | 0;
+    const requested = Number(limitInput.value) || 0;
     const limit = Math.max(2, requested);
 
     const hideList = limit > DISPLAY_LIMIT;
