@@ -105,9 +105,6 @@ self.onmessage = (e) => {
                         primeCount++;
                         if (primeChunk.length >= CHUNK_SIZE) {
                             let chunkData = primeChunk.join(', ');
-                            if (!isFirstChunk) {
-                                chunkData = ', ' + chunkData;
-                            }
                             self.postMessage({ type: 'sieve_chunk', data: chunkData });
                             primeChunk = [];
                             isFirstChunk = false;
@@ -121,9 +118,6 @@ self.onmessage = (e) => {
 
     if (primeChunk.length > 0) {
         let chunkData = primeChunk.join(', ');
-        if (!isFirstChunk) {
-            chunkData = ', ' + chunkData;
-        }
         self.postMessage({ type: 'sieve_chunk', data: chunkData });
     }
 
