@@ -17,6 +17,11 @@
         <a href="/">HOME</a>|<a href="/works/">作品一覧</a>|<a href="/blog">ブログ</a>
         <h1>画像品質評価ツール</h1>
         <p>2枚の画像を比較し、SSIM/MS-SSIM/PSNRを計算します。</p>
+        <h2>使い方</h2>
+        <ol>
+            <li>「画像1 (参照画像)」と「画像2 (比較画像)」のそれぞれで「ファイルを選択」ボタンをクリックして、比較したい画像をアップロードします。</li>
+            <li>画像が表示され、SSIM、MS-SSIM、PSNRの計算結果が表示されます。</li>
+        </ol>
     </header>
     <div class="container">
         <div class="image-upload-section">
@@ -47,6 +52,13 @@
                     <td id="psnrResult">N/A</td>
                 </tr>
             </table>
+        </div>
+        <div>
+            <h2>目安</h2>
+            <ul>
+                <li>SSIM/MS-SSIM: 0.95以上で高品質</li>
+                <li>PSNR: 30dB以上で高品質</li>
+            </ul>
         </div>
     </div>
 </body>
