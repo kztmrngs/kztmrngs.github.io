@@ -18,9 +18,13 @@
 │   │   │   ├── IO/
 │   │   │   └── Preprocessor/
 │   │   ├── Syntax/
-│   │   │   ├── Keywords/
-│   │   │   ├── Statements/
-│   │   │   └── Expressions/
+│   │   │   ├── Basics/
+│   │   │   ├── ControlFlow/
+│   │   │   ├── Functions/
+│   │   │   ├── StructsEnums/
+│   │   │   ├── Preprocessor/
+│   │   │   ├── FileIO/
+│   │   │   └── PointersMem/ (リダイレクト)
 │   │   ├── PointersMem/
 │   │   │   ├── Pointers/
 │   │   │   ├── Arrays/
