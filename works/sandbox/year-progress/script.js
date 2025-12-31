@@ -24,13 +24,13 @@ function updateYearProgress() {
     // 3. プログレスバーの幅を更新
     const progressBar = document.getElementById('progress-bar');
     if (progressBar) {
-        progressBar.style.width = progressPercentage.toFixed(4) + '%'; // 小数点以下4桁まで表示
+        progressBar.style.width = progressPercentage.toFixed(6) + '%'; // 小数点以下6桁まで表示
     }
 
     // 4. 進捗率のテキストを更新
     const progressTextElement = document.getElementById('progress-text');
     if (progressTextElement) {
-        progressTextElement.textContent = `今年の進捗: ${progressPercentage.toFixed(4)}%`; // 小数点以下4桁まで表示
+        progressTextElement.textContent = `今年の進捗: ${progressPercentage.toFixed(6)}%`; // 小数点以下6桁まで表示
     }
 }
 
