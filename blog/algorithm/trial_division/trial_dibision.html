@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="風止渚のホームページ">
+        <meta name="author" content="風止渚">
+        <title>風止渚のホームページ</title>
+        <script>
+            (function() {
+                try {
+                    var theme = localStorage.getItem('theme');
+                    if (!theme) {
+                        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                            theme = 'dark';
+                        } else {
+                            theme = 'light';
+                        }
+                    }
+                    document.documentElement.setAttribute('data-theme', theme);
+                } catch (e) {
+                    // 無視して続行
+                }
+            })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script src="/script.js" defer></script>
+    </head>
+    <body>
+        <header id="header-placeholder"></header>
+        <main>
+            <h1>試し割り法</h1>
+            <p>試し割り法は、ある自然数が素数かどうかを判定するための基本的なアルゴリズムです。<br>
+                この方法では、対象の自然数を2からその平方根までのすべての整数で割り切れるかどうかを調べます。<br>
+                もし割り切れる整数が存在すれば、その自然数は素数ではありません。逆に、割り切れる整数が存在しなければ、その自然数は素数です。</p>
+            <h2>アルゴリズムの手順</h2>
+            <ol>
+                <li>対象の自然数をnとします。</li>
+                <li>2から√nまでのすべての整数iについて、以下の手順を実行します。
+                    <ol>
+                        <li>nをiで割り切れるかどうかを確認します。</li>
+                        <li>もし割り切れる場合、nは素数ではないと判断し、アルゴリズムを終了します。</li>
+                    </ol>
+                </li>
+                <li>すべての整数iについて割り切れなかった場合、nは素数であると判断します。</li>
+            </ol>
+            <h2>計算量</h2>
+            <p>試し割り法の計算量はO(√n)です。これは、対象の自然数nに対して、最大で√n回の割り算を行う必要があるためです。<br>
+                大きな数に対しては効率が悪くなるため、より高度な素数判定アルゴリズムが必要となる場合があります。</p>
+            <h2>証明</h2>
+            <h3>定理</h3>
+            <p>ある自然数nが素数でない場合、nは2から√nまでのいずれかの整数で割り切れる。</p>
+            <h3>証明</h3>
+            <p>nが素数でない場合、nは少なくとも1つの整数aとbの積として表されます。<br>
+                ここで、一番小さい整数をaとし、bをn/aとします。もしaが√nより大きい場合、bは必ず√nより小さくなります。<br>
+                したがって、nは2から√nまでのいずれかの整数で割り切れることになります。</p>
+        </main>
+        <footer id="footer-placeholder"></footer>
+    </body>
+</html>
