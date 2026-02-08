@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+    <head>
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box;}
+            body{
+                font-family: "Noto Sans JP", sans-serif;;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                text-align: center;
+                background-color: #fdfdfd;
+                background-image: /*方眼背景のCSS*/
+                    repeating-linear-gradient(60deg, #eee 0, #eee 1px, transparent 1px, transparent 32px),
+                    repeating-linear-gradient(150deg, #eee 0, #eee 1px, transparent 1px, transparent 32px);
+                color: #000;
+                font-weight: 350;
+            }
+            main {
+                margin: auto;
+                max-width: 720px;
+                width: 80%;
+                flex: 1;
+            }
+            footer {
+                width: 100%;
+                padding: 2rem 0;
+                border-top: 1px solid #ccc;
+                background-color: #eee;
+                margin: 0;
+            }
+            hr {
+                border: #000 1px solid;
+                margin: 4rem 0;
+            }
+            h1 {
+                font-weight: 350;
+                margin: 2em;
+            }
+            h2 {
+                font-weight: 350;
+                padding: 0;
+                padding-left: 0.5rem;
+                margin: 2rem 0;
+                border-left: 2px solid #000;
+            }
+            a {
+                color: #007fff;
+            }
+            p {
+                padding-bottom: 2rem;
+            }
+            img {
+                border-radius: 50%;
+            }
+            .container {
+                background-color: #ffffff;
+                color: #000;
+                font-weight: 350;
+                text-decoration: none;
+                border-radius: 1rem;
+                text-align: start;
+                padding: 0rem 0.5rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin: 1rem 0;
+                box-shadow: 0 0 4px rgba(0,0,0,0.15), 0 0 4px rgba(0,0,0,0.25);
+            }
+            .image {
+                padding: 1rem 0;
+                flex-shrink: 0;
+                width: 33%;
+                max-width: 160px;
+            }
+            .text {
+                flex-grow: 1;
+            }
+            .image img {
+                width: 100%;
+                display: block;
+            }
+            .noimage {
+                padding-left: calc(min(33%, 160px) + 1rem);
+            }
+        </style>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@350&display=swap" rel="stylesheet">
+        <title>links - 風止渚のホームページ</title>
+    </head>
+    <body>
+        <main>
+            <h1>～ Links ～</h1>
+            <hr />
+            <a class="container" href="https://x.com/makur0gaku">
+                <div class="image">
+                    <img src="./imgs/TwitterMainAccountImage.png"/>
+                </div>
+                <div class="text">
+                    <h2>Twitter(メイン垢)</h2>
+                    <p>
+                        HTML/CSS/JS/Python/C/C++/Scratchができる高専生のメイン垢。<br />
+                        コミュ障を脱したいがなかなかできていない。<br />
+                        たくさん話しかけられると嬉しい。<br />
+                        (ただし返答が確実に返ってくるかは不明...)
+                    </p>
+                </div>
+            </a>
+            <a class="container" href="https://x.com/newline_CRLF">
+                <div class="image">
+                    <img src="./imgs/TwitterSubAccountImage.png" />
+                </div>
+                <div class="text">
+                    <h2>Twitter(サブ垢)</h2>
+                    <p>
+                        メイン垢に対してのサブ垢。超雑多/病み垢。<br />
+                        鍵垢。フォロリクは基本通すけど通さない場合もあり。
+                    </p>
+                </div>
+            </a>
+            <a class="container" href="https://github.com/kztmrngs">
+                <div class="text noimage">
+                    <h2>GitHub</h2>
+                    <p>
+                        GitHubアカウント。まだリポジトリは少ないがそのうち増やしていく。
+                    </p>
+                </div>
+            </a>
+            <a class="container" href="https://marshmallow-qa.com/151bw1566v9i0zt?t=wxQW5T&utm_medium=https://kzng.f5.si/links.html&utm_source=promotion">
+                <div class="text noimage">
+                    <h2>マシュマロ</h2>
+                    <p>
+                        匿名メッセージはこちらから。<br />
+                        返信めちゃくちゃ遅いかもしれないのはご了承願います。
+                    </p>
+                </div>
+            </a>
+            <a class="container" href="https://scratch.mit.edu/users/ankouakaisikairoka/">
+                <div class="text noimage">
+                    <h2>Scratch</h2>
+                    <p>
+                        4年くらいやってるやつ。すごい作品まだ一つしか作って無い()<br />
+                        任意精度電卓、3ヶ月くらいめちゃくちゃ頑張って作った!<br />
+                        見てほしい()
+                    </p>
+                </div>
+            </a>
+            <a class="container" href="https://discord.gg/C2Hwg6jBJw">
+                <div class="text noimage">
+                    <h2>Discord鯖</h2>
+                    <p>
+                        鯖主がコミュ障すぎたり過疎だったり。まあ頑張って話してるところ。
+                    </p>
+                </div>
+            </a>
+        </main>
+        <footer>
+            <a href="/">HOME</a>|<p style="display: inline;">&copy; 2026- 風止渚</p>
+        </footer>
+    </body>
+</html>
