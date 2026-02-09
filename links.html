@@ -30,11 +30,14 @@
             }
             hr {
                 border: #000 1px solid;
-                margin: 4rem 0;
+                margin: 4rem 1rem;
             }
             h1 {
                 font-weight: 350;
-                margin: 2em;
+                margin: 4rem 0;
+            }
+            h1::after, h1::before {
+                content: " ～ ";
             }
             h2 {
                 font-weight: 350;
@@ -82,13 +85,24 @@
             .noimage {
                 padding-left: calc(min(33%, 160px) + 1rem);
             }
+            @media (max-width: 576px) {
+                .container {
+                    display: block;
+                    overflow-wrap: anywhere;
+                    padding: 0 1rem;
+                }
+                .noimage {
+                    padding-left: 0;
+                    display: flow-root;
+                }
+            }
         </style>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@350&display=swap" rel="stylesheet">
         <title>links - 風止渚のホームページ</title>
     </head>
     <body>
         <main>
-            <h1>～ Links ～</h1>
+            <h1>Links</h1>
             <hr />
             <a class="container" href="https://x.com/makur0gaku">
                 <div class="image">
@@ -148,6 +162,15 @@
                     <h2>Discord鯖</h2>
                     <p>
                         鯖主がコミュ障すぎたり過疎だったり。まあ頑張って話してるところ。
+                    </p>
+                </div>
+            </a>
+            <a class="container" href="/">
+                <div class="text noimage">
+                    <h2>風止渚のホームページ</h2>
+                    <p>
+                        まくろだったりnewline_crlfだったりする人のホームページ<br />
+                        まだコンテンツは少ないけどそのうち増やしていく。
                     </p>
                 </div>
             </a>
