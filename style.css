@@ -52,12 +52,12 @@
  * --- Base Styles ---
  * 基本的なHTML要素のスタイル
  */
+
 * {
     transition: all 0.2s ease-in-out !important;
-    margin: 0; 
-    padding: 0; 
     box-sizing: border-box;
 }
+
 html, body {
     height: 100%;
     margin: 0;
@@ -115,6 +115,7 @@ h1, h2, h3, h4, h5, h6 {
 hr {
     border: 0;
     border-top: 1px solid var(--color-divider);
+    margin: 0.2rem 0;
 }
 
 p {
