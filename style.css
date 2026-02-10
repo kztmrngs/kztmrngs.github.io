@@ -14,6 +14,7 @@
     --color-surface: #fcfcfc;
     --color-border: #ccc;
     --color-bg: #ffffff;
+    --color-table-bg: #f7f7f7;
     --color-text: #000;
     --color-primary: #007fff;
     --color-primary-dark: #005fcc;
@@ -34,6 +35,7 @@
     --color-surface: #232323;
     --color-border: #444;
     --color-bg: #2c2c2c;
+    --color-table-bg: #282828;
     --color-text: #f3f3f3;
     --color-divider: #444;
     /* ダークモードではリンク色を明るくする */
@@ -50,11 +52,16 @@
  * --- Base Styles ---
  * 基本的なHTML要素のスタイル
  */
+* {
+    transition: all 0.2s ease-in-out !important;
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box;
+}
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    transition: all 0.2s ease-in-out !important;
     font-size: 14px;
     background-color: var(--color-bg);
     color: var(--color-text);
@@ -156,6 +163,31 @@ pre {
     white-space: pre;
     overflow-x: auto;
     box-shadow: var(--shadow-elevation-inset);
+}
+
+/*
+ * --- Table Styles ---
+ * テーブルのスタイル
+ */
+
+table {
+    border-collapse:  collapse;     /* セルの線を重ねる */
+    max-width: 100%;
+    display: block;
+    overflow-x: auto;
+}
+
+th,
+td {
+    border: var(--color-border) 1px solid;
+    padding: 0.2rem 1rem;
+}
+
+th {
+    text-align: left;
+}
+tr:nth-child(odd){
+    background: var(--color-table-bg);
 }
 
 /*
