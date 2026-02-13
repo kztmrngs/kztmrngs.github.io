@@ -8,7 +8,7 @@
                 flex-direction: column;
                 min-height: 100vh;
                 text-align: center;
-                background-color: #fdfdfd;
+                background-color: #fdfdfd; /*#fdfdfd*/
                 background-image: /*方眼背景のCSS*/
                     repeating-linear-gradient(60deg, #eee 0, #eee 1px, transparent 1px, transparent 32px),
                     repeating-linear-gradient(150deg, #eee 0, #eee 1px, transparent 1px, transparent 32px);
@@ -33,6 +33,7 @@
                 margin: 4rem 1rem;
             }
             h1 {
+                font-family: "Playwrite CU", cursive;
                 font-weight: 350;
                 margin: 4rem 0;
             }
@@ -56,7 +57,9 @@
                 border-radius: 50%;
             }
             .container {
-                background-color: #ffffff;
+                background-color: #ffffff1f;
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
                 color: #000;
                 font-weight: 350;
                 text-decoration: none;
@@ -67,7 +70,24 @@
                 align-items: center;
                 gap: 1rem;
                 margin: 1rem 0;
-                box-shadow: 0 0 4px rgba(0,0,0,0.15), 0 0 4px rgba(0,0,0,0.25);
+                box-shadow: 0 0 6px rgba(0,0,0,0.15), 
+                            0 0 4px rgba(0,0,0,0.25), 
+                            inset 0 0 24px 16px rgba(255,255,255,1);
+                position: relative;
+                overflow: hidden;
+            }
+            .container::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: #000;
+                transition: width 0.3s ease-in-out;
+            }
+            .container:hover::after {
+                width: 100%;
             }
             .image {
                 padding: 1rem 0;
@@ -98,6 +118,7 @@
             }
         </style>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@350&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@350&display=swap" rel="stylesheet">
         <title>links - 風止渚のホームページ</title>
     </head>
     <body>
