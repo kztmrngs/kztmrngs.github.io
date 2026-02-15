@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
     <head  prefix="og: https://ogp.me/ns#">
         <meta property="og:title" content="Links - 風止渚のホームページ" />
-        <meta property="og:description" content="Links - 風止渚のホームページ 風止渚に関連するリンクがあります。" />
+        <meta property="og:description" content="風止渚の各種リンクをまとめたページです。" />
+        <meta name="description" content="風止渚の各種リンクをまとめたページです。">
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box;}
             body{
@@ -53,7 +56,7 @@
                 border-left: 2px solid #000;
             }
             a {
-                color: #007fff;
+                color: #005fc0;
             }
             p {
                 padding-bottom: 2rem;
@@ -122,8 +125,8 @@
                 }
             }
         </style>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@350&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@350&display=swap" rel="stylesheet">
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@350&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@350&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <title>links - 風止渚のホームページ</title>
     </head>
     <body>
@@ -132,7 +135,10 @@
             <hr />
             <a class="container" href="https://x.com/makur0gaku">
                 <div class="image">
-                    <img src="./imgs/TwitterMainAccountImage.png"/>
+                    <picture>
+                        <source srcset="imgs/TwitterMainAccountImage.webp" type="image/webp">
+                        <img src="imgs/TwitterMainAccountImage.webp" alt="Twitterメインアカウントのアイコン">
+                    </picture> 
                 </div>
                 <div class="text">
                     <h2>Twitter(メイン垢)</h2>
@@ -146,7 +152,10 @@
             </a>
             <a class="container" href="https://x.com/newline_CRLF">
                 <div class="image">
-                    <img src="./imgs/TwitterSubAccountImage.png" />
+                    <picture>
+                        <source srcset="imgs/TwitterSubAccountImage.webp" type="image/webp">
+                        <img src="imgs/TwitterSubAccountImage.webp" alt="Twitterサブアカウントのアイコン">
+                    </picture> 
                 </div>
                 <div class="text">
                     <h2>Twitter(サブ垢)</h2>
