@@ -24,7 +24,8 @@ Allow: /
 # Internet Archive
 User-agent: ia_archiver
 Allow: /
-
+User-agent: archive.org_bot
+Allow: /
 
 # Common Crawlのクローラーに対するルール
 # Common Crawlのクローラーにはサイト全体へのアクセスを許可しますが、
