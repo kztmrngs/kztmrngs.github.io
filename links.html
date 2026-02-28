@@ -78,10 +78,10 @@
                 text-decoration: none;
                 border-radius: 1rem;
                 text-align: start;
-                padding: 0rem 0.5rem;
+                padding: 0.5rem 0.5rem;
                 display: flex;
-                align-items: center;
-                gap: 1rem;
+                flex-direction: column;
+                gap: 0.5rem;
                 margin: 1rem 0;
                 box-shadow: 0 0 6px rgba(0,0,0,0.15), 
                             0 0 4px rgba(0,0,0,0.25), 
@@ -89,14 +89,53 @@
                 position: relative;
                 overflow: hidden;
             }
+            .container > .contents {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                width: 100%;
+            }
+            .progress-container {
+                width: calc(100% - 1rem);
+                height: 8px;
+                background-color: #333;
+                border-radius: 4px;
+                margin: 0.5rem auto;
+                box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+                overflow: hidden;
+                position: relative;
+            }
+            .progress-bar {
+                height: 100%;
+                background: linear-gradient(90deg, #00c6ff, #00ff88);
+                border-radius: 4px;
+                transition: width 0.5s ease-in-out;
+            }
+            .progress-text {
+                font-size: 0.75rem;
+                text-align: right;
+                padding-right: 0.5rem;
+                margin-top: -0.25rem;
+                color: #555;
+            }
+            /* Hide progress elements by default for noscript environment */
+            .progress-container, .progress-text {
+                display: none;
+            }
+            .js-enabled .progress-container {
+                display: block;
+            }
+            .js-enabled .progress-text {
+                display: block;
+            }
             .container::after {
                 content: '';
                 position: absolute;
                 bottom: 0;
                 left: 0;
                 width: 0;
-                height: 2px;
-                background-color: #000;
+                height: 0.25rem;
+                background: linear-gradient(90deg, #ff3300, #eeff00);
                 transition: width 0.3s ease-in-out;
             }
             .container:hover::after {
@@ -140,37 +179,49 @@
             <hr />
         </header>
         <main>
-            <a class="container" href="https://x.com/makur0gaku">
-                <div class="image">
-                    <picture>
-                        <source srcset="imgs/TwitterMainAccountImage.webp" type="image/webp">
-                        <img src="imgs/TwitterMainAccountImage.png" alt="Twitterメインアカウントのアイコン">
-                    </picture> 
+            <a class="container" href="https://x.com/makur0gaku" id="twitter-main">
+                <div class="contents">
+                    <div class="image">
+                        <picture>
+                            <source srcset="imgs/TwitterMainAccountImage.webp" type="image/webp">
+                            <img src="imgs/TwitterMainAccountImage.png" alt="Twitterメインアカウントのアイコン">
+                        </picture> 
+                    </div>
+                    <div class="text">
+                        <h2>Twitter(メイン垢)</h2>
+                        <p>
+                            HTML/CSS/JS/Python/C/C++/Scratchができる高専生のメイン垢。<br />
+                            コミュ障を脱したいがなかなかできていない。<br />
+                            たくさん話しかけられると嬉しい。<br />
+                            (ただし返答が確実に返ってくるかは不明...)
+                        </p>
+                    </div>
                 </div>
-                <div class="text">
-                    <h2>Twitter(メイン垢)</h2>
-                    <p>
-                        HTML/CSS/JS/Python/C/C++/Scratchができる高専生のメイン垢。<br />
-                        コミュ障を脱したいがなかなかできていない。<br />
-                        たくさん話しかけられると嬉しい。<br />
-                        (ただし返答が確実に返ってくるかは不明...)
-                    </p>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
                 </div>
+                <div class="progress-text"></div>
             </a>
-            <a class="container" href="https://x.com/newline_CRLF">
-                <div class="image">
-                    <picture>
-                        <source srcset="imgs/TwitterSubAccountImage.webp" type="image/webp">
-                        <img src="imgs/TwitterSubAccountImage.png" alt="Twitterサブアカウントのアイコン">
-                    </picture> 
+            <a class="container" href="https://x.com/newline_CRLF" id="twitter-sub">
+                <div class="contents">
+                    <div class="image">
+                        <picture>
+                            <source srcset="imgs/TwitterSubAccountImage.webp" type="image/webp">
+                            <img src="imgs/TwitterSubAccountImage.png" alt="Twitterサブアカウントのアイコン">
+                        </picture> 
+                    </div>
+                    <div class="text">
+                        <h2>Twitter(サブ垢)</h2>
+                        <p>
+                            メイン垢に対してのサブ垢。超雑多/病み垢。<br />
+                            鍵垢。フォロリクは基本通すけど通さない場合もあり。
+                        </p>
+                    </div>
                 </div>
-                <div class="text">
-                    <h2>Twitter(サブ垢)</h2>
-                    <p>
-                        メイン垢に対してのサブ垢。超雑多/病み垢。<br />
-                        鍵垢。フォロリクは基本通すけど通さない場合もあり。
-                    </p>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
                 </div>
+                <div class="progress-text"></div>
             </a>
             <a class="container" href="https://github.com/kztmrngs">
                 <div class="text noimage">
@@ -250,5 +301,26 @@
             <a href="/">HOME</a>|<span>&copy; 2026- 風止渚</span><br />
             <p style="color: #005fc0; text-decoration: underline; cursor: pointer; padding-bottom: 0; margin: 0 auto; width: fit-content;" onclick="alert('\u0063\u006F\u006E\u0074\u0061\u0063\u0074\u0040\u006B\u007A\u006E\u0067\u002E\u0066\u0035\u002E\u0073\u0069')">問い合わせ</p>
         </footer>
+        <script>
+            document.body.classList.add('js-enabled');
+            const followerData = {
+                'twitter-main': { current: 1380, goal: 2000 },
+                'twitter-sub': { current: 110, goal: 150 }
+            };
+
+            Object.keys(followerData).forEach(id => {
+                const element = document.getElementById(id);
+                if (!element) return;
+                
+                const data = followerData[id];
+                const percent = Math.min((data.current / data.goal) * 100, 100);
+                
+                const bar = element.querySelector('.progress-bar');
+                const text = element.querySelector('.progress-text');
+                
+                if (bar) bar.style.width = percent + '%';
+                if (text) text.textContent = `${data.current} / ${data.goal} followers`;
+            });
+        </script>
     </body>
 </html>
