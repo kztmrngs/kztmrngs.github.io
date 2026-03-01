@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head  prefix="og: https://ogp.me/ns#">
+    <head prefix="og: https://ogp.me/ns#">
         <meta property="og:title" content="Links - 風止渚のホームページ" />
         <meta property="og:description" content="風止渚の各種リンクをまとめたページです。" />
         <meta name="description" content="風止渚の各種リンクをまとめたページです。">
@@ -11,17 +11,19 @@
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box;}
             body{
-                font-family: "Noto Sans JP", sans-serif;;
+                font-family: "Noto Sans JP", sans-serif;
                 display: flex;
                 flex-direction: column;
                 min-height: 100vh;
                 text-align: center;
-                background-color: #fdfdfd; /*#fdfdfd*/
-                background-image: /*方眼背景のCSS*/
+                background-color: #fdfdfd;
+                background-image: 
                     repeating-linear-gradient(60deg, #eee 0, #eee 1px, transparent 1px, transparent 32px),
                     repeating-linear-gradient(150deg, #eee 0, #eee 1px, transparent 1px, transparent 32px);
                 color: #000;
                 font-weight: 350;
+                /* フォント読み込み時のガタつき防止 */
+                font-display: swap; 
             }
             header {
                 max-width: 720px;
@@ -68,6 +70,10 @@
             }
             img {
                 border-radius: 50%;
+                /* 画像の読み込みまで高さを保持するための設定 */
+                height: auto; 
+                aspect-ratio: 1 / 1;
+                background-color: #eee; /* 読み込み前のプレースホルダー */
             }
             .container {
                 background-color: #ffffff1f;
@@ -104,12 +110,15 @@
                 box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
                 overflow: hidden;
                 position: relative;
+                /* JS実行前でも高さを確保してCLSを防ぐ */
+                display: block; 
             }
             .progress-bar {
+                width: 0%; /* 初期値 */
                 height: 100%;
                 background: linear-gradient(90deg, #00c6ff, #00ff88);
                 border-radius: 0.25rem;
-                transition: width 0.5s ease-in-out;
+                transition: width 0.8s ease-in-out;
             }
             .progress-text {
                 font-size: 0.75rem;
@@ -117,17 +126,15 @@
                 padding-right: 0.5rem;
                 margin-top: -0.25rem;
                 color: #555;
+                /* テキスト出現時のガタつきを防ぐため高さを予約 */
+                min-height: 1.2em; 
             }
-            /* Hide progress elements by default for noscript environment */
-            .progress-container, .progress-text {
+            /* JS無効時のみ非表示にする設定 */
+            .no-js .progress-container,
+            .no-js .progress-text {
                 display: none;
             }
-            .js-enabled .progress-container {
-                display: block;
-            }
-            .js-enabled .progress-text {
-                display: block;
-            }
+
             .container::after {
                 content: '';
                 position: absolute;
@@ -158,7 +165,7 @@
                 padding-left: calc(min(33%, 160px) + 1rem);
             }
             @media (max-width: 576px) {
-                .container {
+                .container > .contents {
                     display: block;
                     overflow-wrap: anywhere;
                     padding: 0 1rem;
@@ -169,11 +176,13 @@
                 }
             }
         </style>
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@350&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@350&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <!-- フォントの読み込みを最適化 -->
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@350&family=Playwrite+CU:wght@350&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@350&family=Playwrite+CU:wght@350&display=swap"></noscript>
         <title>links - 風止渚のホームページ</title>
     </head>
-    <body>
+    <body class="no-js">
+        <script>document.body.classList.remove('no-js');</script>
         <header>
             <h1>Links</h1>
             <hr />
@@ -184,7 +193,8 @@
                     <div class="image">
                         <picture>
                             <source srcset="imgs/TwitterMainAccountImage.webp" type="image/webp">
-                            <img src="imgs/TwitterMainAccountImage.png" alt="Twitterメインアカウントのアイコン">
+                            <!-- CLS対策: width/height追加 / FCP対策: fetchpriority追加 -->
+                            <img src="imgs/TwitterMainAccountImage.png" alt="Twitterメインアカウントのアイコン" width="160" height="160" fetchpriority="high">
                         </picture> 
                     </div>
                     <div class="text">
@@ -207,7 +217,7 @@
                     <div class="image">
                         <picture>
                             <source srcset="imgs/TwitterSubAccountImage.webp" type="image/webp">
-                            <img src="imgs/TwitterSubAccountImage.png" alt="Twitterサブアカウントのアイコン">
+                            <img src="imgs/TwitterSubAccountImage.png" alt="Twitterサブアカウントのアイコン" width="160" height="160">
                         </picture> 
                     </div>
                     <div class="text">
@@ -255,7 +265,8 @@
                     <div class="image">
                         <picture>
                             <source srcset="imgs/NGSServerLogo.avif" type="image/avif">
-                            <img src="imgs/NGSServerLogo.png" alt="Discordサーバーのアイコン">
+                            <!-- 画面下部の画像には loading="lazy" を追加 -->
+                            <img src="imgs/NGSServerLogo.png" alt="Discordサーバーのアイコン" width="160" height="160" loading="lazy">
                         </picture>
                     </div>
                     <div class="text">
@@ -271,7 +282,7 @@
                     <div class="image">
                         <picture>
                             <source srcset="imgs/DiscordIcon.webp" type="image/webp">
-                            <img src="imgs/DiscordIcon.jpg" alt="Discordのアイコン">
+                            <img src="imgs/DiscordIcon.jpg" alt="Discordのアイコン" width="160" height="160" loading="lazy">
                         </picture>
                     </div>
                     <div class="text">
@@ -295,7 +306,7 @@
                 <div class="text noimage">
                     <h2>風止渚のホームページ</h2>
                     <p>
-                        まくろだったりnewline_crlfだったりする人のホームページ<br />
+                        まくろだったり newline_crlf だったりする人のホームページ<br />
                         まだコンテンツは少ないけどそのうち増やしていく。
                     </p>
                 </div>
@@ -306,24 +317,26 @@
             <p style="color: #005fc0; text-decoration: underline; cursor: pointer; padding-bottom: 0; margin: 0 auto; width: fit-content;" onclick="alert('\u0063\u006F\u006E\u0074\u0061\u0063\u0074\u0040\u006B\u007A\u006E\u0067\u002E\u0066\u0035\u002E\u0073\u0069')">問い合わせ</p>
         </footer>
         <script>
-            document.body.classList.add('js-enabled');
             const followerData = {
                 'twitter-main': { current: 1380, goal: 2000 },
                 'twitter-sub': { current: 110, goal: 150 }
             };
 
-            Object.keys(followerData).forEach(id => {
-                const element = document.getElementById(id);
-                if (!element) return;
-                
-                const data = followerData[id];
-                const percent = Math.min((data.current / data.goal) * 100, 100);
-                
-                const bar = element.querySelector('.progress-bar');
-                const text = element.querySelector('.progress-text');
-                
-                if (bar) bar.style.width = percent + '%';
-                if (text) text.textContent = `${data.current} / ${data.goal} followers`;
+            // DOMContentLoadedを待ってから実行（より安定します）
+            window.addEventListener('DOMContentLoaded', () => {
+                Object.keys(followerData).forEach(id => {
+                    const element = document.getElementById(id);
+                    if (!element) return;
+                    
+                    const data = followerData[id];
+                    const percent = Math.min((data.current / data.goal) * 100, 100);
+                    
+                    const bar = element.querySelector('.progress-bar');
+                    const text = element.querySelector('.progress-text');
+                    
+                    if (bar) bar.style.width = percent + '%';
+                    if (text) text.textContent = `${data.current} / ${data.goal} followers`;
+                });
             });
         </script>
     </body>
