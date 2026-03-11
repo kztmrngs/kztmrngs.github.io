@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="風止渚のホームページ">
+        <meta name="author" content="風止渚">
+        <title>風止渚のホームページ</title>
+        <script>
+            (function() {
+                try {
+                    var theme = localStorage.getItem('theme');
+                    if (!theme) {
+                        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                            theme = 'dark';
+                        } else {
+                            theme = 'light';
+                        }
+                    }
+                    document.documentElement.setAttribute('data-theme', theme);
+                } catch (e) {
+                    // 無視して続行
+                }
+            })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script src="/script.js" defer></script>
+    </head>
+    <body>
+        <header id="header-placeholder"></header>
+        <main>
+            <h1>cjpegli コマンド備忘録</h1>
+            <h2>基本的な使い方</h2>
+            <pre><code>cjpegli input output.jpg [options]</code></pre>
+            <h2>基本的なオプション:</h2>
+            <ul>
+                <li><code>-q</code>: 品質を指定 (0-100, 100が最良 よくあるJPEGエンコーダーとかの品質と似ているスケール)</li>
+                <li><code>-d</code>: 品質を指定 (0.0-25.0, 0が最良 butteraugliという指標 距離で示す。 1がニアロスレス)</li>
+                <li><code>-p</code>: プログレッシブレベル (0-2, 0がベースライン, 2がデフォルト)</li>
+                <li><code>--xyb</code>: xybカラースペースを使用</li>
+                <li><code>--chroma_subsampling</code>: クロマサブサンプリングを指定 (444,440,422,420)</li>
+                <li><code>-v</code>: 詳細な出力を表示</li>
+                <li><code>-h</code>: ヘルプを表示</li>
+            </ul>
+            <h2>例:</h2>
+            <pre class="code-block"><code>
+                cjpegli input.png output.jpg -q 75 -p 2 --xyb --chroma_subsampling 420
+                // これは、品質75、プログレッシブレベル2、xybカラースペース、420クロマサブサンプリングでJPEGを生成します。
+            </code></pre>
+            <pre class="code-block"><code>
+                cjpegli input.jpg output.jpg -d 1.0 -p 1
+                // これは、品質1.0、プログレッシブレベル1でJPEGを生成します。
+            </code></pre>
+            <h2>リポジトリ</h2>
+            <p>cjpegliのソースコードは<a href="https://github.com/libjxl/libjxl">GitHubのlibjxlリポジトリ</a>で公開されています。</p>
+            <h2>謝辞</h2>
+            <p>cjpegliは、Googleのlibjxlプロジェクトの一部であり、JPEG XLエンコーディングのためのコマンドラインツールから派生したツールです。開発者の皆様に感謝します。</p>
+        </main>
+        <footer id="footer-placeholder"></footer>
+    </body>
+</html>
