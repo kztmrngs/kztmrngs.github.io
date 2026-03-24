@@ -10,38 +10,38 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box;}
-            body{
+            html {
+                font-size: clamp(12.7px, 3.5vw, 16px);
+            }
+            body {
                 font-family: "Noto Sans JP", sans-serif;
-                display: flex;
-                flex-direction: column;
+                display: grid; /* flexからgridに変更 */
+                grid-template-rows: auto 1fr auto; /* ヘッダー、メイン、フッターの高さ制御 */
                 min-height: 100vh;
                 text-align: center;
                 background-color: #fdfdfd;
-                background-image: 
+                background-image: /* 斜めのグリッドパターンを背景に設定 (薄いグレーの線) */
                     repeating-linear-gradient(60deg, #eee 0, #eee 1px, transparent 1px, transparent 32px),
                     repeating-linear-gradient(150deg, #eee 0, #eee 1px, transparent 1px, transparent 32px);
                 color: #000;
                 font-weight: 350;
-                /* フォント読み込み時のガタつき防止 */
                 font-display: swap; 
             }
             header {
-                max-width: 720px;
+                max-width: 720px; 
                 margin: auto;
                 width: 80%;
             }
             main {
                 max-width: 720px;
-                margin: auto;
+                margin:auto;
                 width: 80%;
-                flex: 1;
             }
             footer {
                 width: 100%;
                 padding: 2rem 0;
                 border-top: 1px solid #ccc;
-                background-color: #eee;
-                margin: 0;
+                background-color: #eee; margin: 0;
             }
             hr {
                 border: #000 1px solid;
@@ -52,29 +52,12 @@
                 font-weight: 350;
                 margin: 4rem 0;
             }
-            h1::after, h1::before {
-                content: " ～ ";
-            }
-            h2 {
-                font-weight: 350;
-                padding: 0;
-                padding-left: 0.5rem;
-                margin: 2rem 0;
-                border-left: 2px solid #000;
-            }
+            h1::after, h1::before { content: " ～ "; }
             a {
                 color: #005fc0;
             }
-            p {
-                padding-bottom: 2rem;
-            }
-            img {
-                border-radius: 50%;
-                /* 画像の読み込みまで高さを保持するための設定 */
-                height: auto; 
-                aspect-ratio: 1 / 1;
-                background-color: #eee; /* 読み込み前のプレースホルダー */
-            }
+            
+            /* --- カードコンテナの設定 (Gridで階層を浅く) --- */
             .container {
                 background-color: #ffffff1f;
                 backdrop-filter: blur(4px);
@@ -85,23 +68,69 @@
                 border-radius: 1rem;
                 text-align: start;
                 padding: 0.5rem 0.5rem;
-                display: flex;
-                flex-direction: column;
-                gap: 0.5rem;
                 margin: 1rem 0;
-                box-shadow: 0 0 6px rgba(0,0,0,0.15), 
-                            0 0 4px rgba(0,0,0,0.25), 
-                            inset 0 0 24px 16px rgba(255,255,255,1);
+                box-shadow: 0 0 6px rgba(0,0,0,0.15), 0 0 4px rgba(0,0,0,0.25), inset 0 0 24px 16px rgba(255,255,255,1);
                 position: relative;
                 overflow: hidden;
+                overflow-wrap: anywhere;
+
+                display: grid;
+                grid-template-columns: min(33%, 160px) 1fr; /* 画像幅を1列目に */
+                column-gap: 1rem; 
+                row-gap: 0;
+                grid-template-areas: 
+                    "icon title"
+                    "icon desc"
+                    "bar  bar"
+                    "txt  txt";
             }
-            .container > .contents {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                width: 100%;
+
+            /* 各要素の配置と元の余白の維持 */
+            .container picture {
+                grid-area: icon;
+                padding: 1rem 0; 
+                align-self: center; /* 縦中央揃え */
             }
+
+            .container picture img {
+                width: 100%; display: block; border-radius: 50%; height: auto; aspect-ratio: 1 / 1; background-color: #eee;
+            }
+
+            .container h2 {
+                grid-area: title;
+                font-weight: 350;
+                padding: 0 0 0 0.5rem;
+                margin: 2rem 0;
+                border-left: 2px solid #000;
+                align-self: end;
+            }
+
+            .container p {
+                grid-area: desc;
+                padding-bottom: 2rem;
+                margin: 0;
+                align-self: start;
+            }
+
+            /* --- 画像なし (.noimage) の設定 --- */
+            .container.noimage {
+                grid-template-columns: 1fr;
+                grid-template-areas: 
+                    "title"
+                    "desc"
+                    "bar"
+                    "txt";
+            }
+
+            /* デスクトップ版: 左側に画像分の空白を作る */
+            .container.noimage h2,
+            .container.noimage p {
+                margin-left: calc(min(33%, 160px) + 1rem);
+            }
+
+            /* --- プログレスバーの設定  --- */
             .progress-container {
+                grid-area: bar;
                 width: calc(100% - 1rem);
                 height: 0.5rem;
                 background-color: #333;
@@ -110,73 +139,80 @@
                 box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
                 overflow: hidden;
                 position: relative;
-                /* JS実行前でも高さを確保してCLSを防ぐ */
-                display: block; 
+                display: block;
             }
             .progress-bar {
-                width: 0%; /* 初期値 */
-                height: 100%;
-                background: linear-gradient(90deg, #00c6ff, #00ff88);
-                border-radius: 0.25rem;
-                transition: width 0.8s ease-in-out;
+                width: 0%; height: 100%; background: linear-gradient(90deg, #00c6ff, #00ff88); border-radius: 0.25rem; transition: width 0.8s ease-in-out;
             }
+
             .progress-text {
-                font-size: 0.75rem;
-                text-align: right;
-                padding-right: 0.5rem;
-                margin-top: -0.25rem;
-                color: #555;
-                /* テキスト出現時のガタつきを防ぐため高さを予約 */
-                min-height: 1.2em; 
+                grid-area: txt;
+                font-size: 0.75rem; text-align: right; padding-right: 0.5rem; margin-top: -0.25rem; color: #555; min-height: 1.2em;
             }
-            /* JS無効時のみ非表示にする設定 */
-            .no-js .progress-container,
-            .no-js .progress-text {
+
+            .no-js .progress-container, .no-js .progress-text {
                 display: none;
             }
 
+            /* ホバーアニメーション */
             .container::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 0;
-                height: 0.25rem;
-                background: linear-gradient(90deg, #ff3300, #eeff00);
-                transition: width 0.3s ease-in-out;
+                content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 0.25rem;
+                background: linear-gradient(90deg, #ff3300, #eeff00); transition: width 0.3s ease-in-out;
             }
-            .container:hover::after {
-                width: 100%;
-            }
-            .image {
-                padding: 1rem 0;
-                flex-shrink: 0;
-                width: 33%;
-                max-width: 160px;
-            }
-            .text {
-                flex-grow: 1;
-            }
-            .image img {
-                width: 100%;
-                display: block;
-            }
-            .noimage {
-                padding-left: calc(min(33%, 160px) + 1rem);
-            }
+
+            .container:hover::after { width: 100%; }
+
+            /* --- レスポンシブ設定 (モバイル) --- */
             @media (max-width: 576px) {
-                .container > .contents {
-                    display: block;
-                    overflow-wrap: anywhere;
-                    padding: 0 1rem;
+                .container {
+                    /* スマホでも2列を維持し、アイコン横にh2を配置 */
+                    grid-template-columns: min(33%, 160px) 1fr;
+                    grid-template-areas: 
+                        "icon title"
+                        "desc desc" /* p要素は2列分使ってアイコンの下まで回り込む */
+                        "bar  bar"
+                        "txt  txt";
                 }
-                .noimage {
-                    padding-left: 0;
-                    display: flow-root;
+
+                /* スマホ用の余白調整 */
+                .container picture {
+                    padding-left: 1rem;
+                }
+
+                .container h2 {
+                    margin: 1rem 0; /* アイコン横に配置するためマージン調整 */
+                    padding-right: 1rem;
+                    align-self: center; /* アイコンに対して縦中央 */
+                }
+
+                .container p {
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
+
+                /* スマホ用: noimageの調整 */
+                .container.noimage {
+                    grid-template-columns: 1fr;
+                    grid-template-areas: "title" "desc" "bar" "txt";
+                }
+
+                .container.noimage h2,
+                .container.noimage p {
+                    margin-left: 0; /* デスクトップの余白をリセット */
+                }
+
+                .container.noimage h2 {
+                    margin-left: 1rem;
+                    padding-right: 1rem;
+                    margin-top: 2rem; /* h2の元マージンを復帰 */
+                }
+
+                .container.noimage p {
+                    padding-left: 1rem;
+                    padding-right: 1rem;
                 }
             }
         </style>
-        <!-- フォントの読み込みを最適化 -->
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@350&family=Playwrite+CU:wght@350&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@350&family=Playwrite+CU:wght@350&display=swap"></noscript>
         <title>links - 風止渚のホームページ</title>
@@ -188,138 +224,105 @@
             <hr />
         </header>
         <main>
+            <!-- 1. Twitter メイン (アイコンあり＋プログレスバー) -->
             <a class="container" href="https://x.com/makur0gaku" id="twitter-main">
-                <div class="contents">
-                    <div class="image">
-                        <picture>
-                            <source srcset="imgs/TwitterMainAccountImage.webp" type="image/webp">
-                            <!-- CLS対策: width/height追加 / FCP対策: fetchpriority追加 -->
-                            <img src="imgs/TwitterMainAccountImage.png" alt="Twitterメインアカウントのアイコン" width="160" height="160" fetchpriority="high">
-                        </picture> 
-                    </div>
-                    <div class="text">
-                        <h2>Twitter(メイン垢)</h2>
-                        <p>
-                            HTML/CSS/JS/Python/C/C++/Scratchができる高専生のメイン垢。<br />
-                            コミュ障を脱したいがなかなかできていない。<br />
-                            たくさん話しかけられると嬉しい。<br />
-                            (ただし返答が確実に返ってくるかは不明...)
-                        </p>
-                    </div>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-bar"></div>
-                </div>
+                <picture>
+                    <source srcset="imgs/TwitterMainAccountImage.webp" type="image/webp">
+                    <img src="imgs/TwitterMainAccountImage.png" alt="Twitterメインアカウントのアイコン" width="160" height="160" fetchpriority="high">
+                </picture> 
+                <h2>Twitter(メイン垢)</h2>
+                <p>
+                    HTML/CSS/JS/Python/C/C++/Scratchができる高専生のメイン垢。<br />
+                    コミュ障を脱したいがなかなかできていない。<br />
+                    たくさん話しかけられると嬉しい。<br />
+                    (ただし返答が確実に返ってくるかは不明...)
+                </p>
+                <div class="progress-container"><div class="progress-bar"></div></div>
                 <div class="progress-text"></div>
             </a>
+
+            <!-- 2. Twitter サブ (アイコンあり＋プログレスバー) -->
             <a class="container" href="https://x.com/newline_CRLF" id="twitter-sub">
-                <div class="contents">
-                    <div class="image">
-                        <picture>
-                            <source srcset="imgs/TwitterSubAccountImage.webp" type="image/webp">
-                            <img src="imgs/TwitterSubAccountImage.png" alt="Twitterサブアカウントのアイコン" width="160" height="160">
-                        </picture> 
-                    </div>
-                    <div class="text">
-                        <h2>Twitter(サブ垢)</h2>
-                        <p>
-                            メイン垢に対してのサブ垢。超雑多/病み垢。<br />
-                            鍵垢。フォロリクは基本通すけど通さない場合もあり。
-                        </p>
-                    </div>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-bar"></div>
-                </div>
+                <picture>
+                    <source srcset="imgs/TwitterSubAccountImage.webp" type="image/webp">
+                    <img src="imgs/TwitterSubAccountImage.png" alt="Twitterサブアカウントのアイコン" width="160" height="160">
+                </picture> 
+                <h2>Twitter(サブ垢)</h2>
+                <p>
+                    メイン垢に対してのサブ垢。超雑多/病み垢。<br />
+                    鍵垢。フォロリクは基本通すけど通さない場合もあり。
+                </p>
+                <div class="progress-container"><div class="progress-bar"></div></div>
                 <div class="progress-text"></div>
             </a>
-            <a class="container" href="https://github.com/kztmrngs">
-                <div class="contents">
-                    <div class="text noimage">
-                        <h2>GitHub</h2>
-                        <p>
-                            GitHubアカウント。まだリポジトリは少ないがそのうち増やしていく。
-                        </p>
-                    </div>
-                </div>
+
+            <!-- 3. GitHub (noimage) -->
+            <a class="container noimage" href="https://github.com/kztmrngs">
+                <h2>GitHub</h2>
+                <p>
+                    GitHubアカウント。まだリポジトリは少ないがそのうち増やしていく。
+                </p>
             </a>
-            <a class="container" href="https://marshmallow-qa.com/151bw1566v9i0zt?t=wxQW5T&utm_medium=https://kzng.f5.si/links.html&utm_source=promotion">
-                <div class="contents">
-                    <div class="text noimage">
-                        <h2>マシュマロ</h2>
-                        <p>
-                            匿名メッセージはこちらから。<br />
-                            返信めちゃくちゃ遅いかもしれないのはご了承願います。
-                        </p>
-                    </div>
-                </div>
+
+            <!-- 4. マシュマロ (noimage) -->
+            <a class="container noimage" href="https://marshmallow-qa.com/151bw1566v9i0zt?t=wxQW5T&utm_medium=https://kzng.f5.si/links.html&utm_source=promotion">
+                <h2>マシュマロ</h2>
+                <p>
+                    匿名メッセージはこちらから。<br />
+                    返信めちゃくちゃ遅いかもしれないのはご了承願います。
+                </p>
             </a>
-            <a class="container" href="https://scratch.mit.edu/users/ankouakaisikairoka/">
-                <div class="contents">
-                    <div class="text noimage">
-                        <h2>Scratch</h2>
-                        <p>
-                            4年くらいやってるやつ。すごい作品まだ一つしか作って無い()<br />
-                            任意精度電卓、3ヶ月くらいめちゃくちゃ頑張って作った!<br />
-                            見てほしい()
-                        </p>
-                    </div>
-                </div>
+
+            <!-- 5. Scratch (noimage) -->
+            <a class="container noimage" href="https://scratch.mit.edu/users/ankouakaisikairoka/">
+                <h2>Scratch</h2>
+                <p>
+                    4年くらいやってるやつ。すごい作品まだ一つしか作って無い()<br />
+                    任意精度電卓、3ヶ月くらいめちゃくちゃ頑張って作った!<br />
+                    見てほしい()
+                </p>
             </a>
+
+            <!-- 6. Discord鯖 (アイコンあり) -->
             <a class="container" href="https://discord.gg/3vxcQTn7Z5">
-                <div class="contents">
-                    <div class="image">
-                        <picture>
-                            <source srcset="imgs/NGSServerLogo.avif" type="image/avif">
-                            <!-- 画面下部の画像には loading="lazy" を追加 -->
-                            <img src="imgs/NGSServerLogo.png" alt="Discordサーバーのアイコン" width="160" height="160" loading="lazy">
-                        </picture>
-                    </div>
-                    <div class="text">
-                        <h2>Discord鯖</h2>
-                        <p>
-                            鯖主がコミュ障すぎたり過疎だったり。まあ頑張って話してるところ。
-                        </p>
-                    </div>
-                </div>
+                <picture>
+                    <source srcset="imgs/NGSServerLogo.avif" type="image/avif">
+                    <img src="imgs/NGSServerLogo.png" alt="Discordサーバーのアイコン" width="160" height="160" loading="lazy">
+                </picture>
+                <h2>Discord鯖</h2>
+                <p>
+                    鯖主がコミュ障すぎたり過疎だったり。まあ頑張って話してるところ。
+                </p>
             </a>
+
+            <!-- 7. Discord個人 (アイコンあり) -->
             <a class="container" href="https://discordapp.com/users/1361640482936983563">
-                <div class="contents">
-                    <div class="image">
-                        <picture>
-                            <source srcset="imgs/DiscordIcon.webp" type="image/webp">
-                            <img src="imgs/DiscordIcon.jpg" alt="Discordのアイコン" width="160" height="160" loading="lazy">
-                        </picture>
-                    </div>
-                    <div class="text">
-                        <h2>Discord(個人垢)</h2>
-                        <p>
-                            風止渚のDiscord個人垢。話しかけるときは「風止渚のホームページのリンクから来ました」とか言ってもらえると嬉しい。</b>
-                            ただコミュ障過ぎるので返答が返ってくる可能性は低いかもしれません。
-                        </p>
-                    </div>
-                </div>
+                <picture>
+                    <source srcset="imgs/DiscordIcon.webp" type="image/webp">
+                    <img src="imgs/DiscordIcon.jpg" alt="Discordのアイコン" width="160" height="160" loading="lazy">
+                </picture>
+                <h2>Discord(個人垢)</h2>
+                <p>
+                    風止渚のDiscord個人垢。話しかけるときは「風止渚のホームページのリンクから来ました」とか言ってもらえると嬉しい。<br />
+                    ただコミュ障過ぎるので返答が返ってくる可能性は低いかもしれません。
+                </p>
             </a>
-            <a class="container" href="https://www.youtube.com/channel/UCB3QMt3F55zCn2GFH4OKmgQ">
-                <div class="contents">
-                    <div class="text noimage">
-                        <h2>Youtube</h2>
-                        <p>
-                            まだまともなコンテンツはない()
-                        </p>
-                    </div>
-                </div>
+
+            <!-- 8. Youtube (noimage) -->
+            <a class="container noimage" href="https://www.youtube.com/channel/UCB3QMt3F55zCn2GFH4OKmgQ">
+                <h2>Youtube</h2>
+                <p>
+                    まだまともなコンテンツはない()
+                </p>
             </a>
-            <a class="container" href="/">
-                <div class="contents">
-                    <div class="text noimage">
-                        <h2>風止渚のホームページ</h2>
-                        <p>
-                            まくろだったり newline_crlf だったりする人のホームページ<br />
-                            まだコンテンツは少ないけどそのうち増やしていく。
-                        </p>
-                    </div>
-                </div>
+
+            <!-- 9. 風止渚のホームページ (noimage) -->
+            <a class="container noimage" href="/">
+                <h2>風止渚のホームページ</h2>
+                <p>
+                    まくろだったり newline_crlf だったりする人のホームページ<br />
+                    まだコンテンツは少ないけどそのうち増やしていく。
+                </p>
             </a>
         </main>
         <footer>
@@ -328,11 +331,10 @@
         </footer>
         <script>
             const followerData = {
-                'twitter-main': { current: 1380, goal: 2000 },
-                'twitter-sub': { current: 110, goal: 150 }
+                'twitter-main': { current: 1470, goal: 2000 },
+                'twitter-sub': { current: 120, goal: 150 }
             };
 
-            // DOMContentLoadedを待ってから実行（より安定します）
             window.addEventListener('DOMContentLoaded', () => {
                 Object.keys(followerData).forEach(id => {
                     const element = document.getElementById(id);
