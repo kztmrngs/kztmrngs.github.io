@@ -8,7 +8,50 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        
+        <!-- ダークモード初期化スクリプト (チラつき防止) -->
+        <script>
+            (function() {
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            })();
+        </script>
+
         <style>
+            /* --- カラースキーム定義 --- */
+            :root {
+                --bg-color: #fdfdfd;
+                --grid-line: #eee;
+                --text-color: #000;
+                --link-color: #005fc0;
+                --footer-bg: #42424216;
+                --footer-border: #ccc;
+                --footer-shadow: inset 0 0 6px 3px rgba(0,0,0,0.05);
+                --container-bg: #ffffff1f;
+                --container-shadow: 0 0 6px rgba(0,0,0,0.15), 0 0 4px rgba(0,0,0,0.25), inset 0 0 24px 16px rgba(255,255,255,1);
+                --progress-bg: #333;
+                --progress-text: #555;
+                --img-bg: #eee;
+            }[data-theme="dark"] {
+                --bg-color: #1a1a1a;
+                --grid-line: #2a2a2a;
+                --text-color: #e8e8e8;
+                --link-color: #66b2ff;
+                --footer-bg: rgba(0, 0, 0, 0.2);
+                --footer-border: #444;
+                --footer-shadow: inset 0 0 6px 3px rgba(0,0,0,0.5);
+                --container-bg: rgba(255, 255, 255, 0.05);
+                --container-shadow: 0 0 6px rgba(0,0,0,0.4), 0 0 4px rgba(0,0,0,0.6), inset 0 0 24px 16px rgba(30,30,30,0.8);
+                --progress-bg: #111;
+                --progress-text: #aaa;
+                --img-bg: #333;
+            }
+
             * { margin: 0; padding: 0; box-sizing: border-box;}
             html {
                 font-size: clamp(12.7px, 3.5vw, 16px);
@@ -19,11 +62,11 @@
                 grid-template-rows: auto 1fr auto; /* ヘッダー、メイン、フッターの高さ制御 */
                 min-height: 100vh;
                 text-align: center;
-                background-color: #fdfdfd;
-                background-image: /* 斜めのグリッドパターンを背景に設定 (薄いグレーの線) */
-                    repeating-linear-gradient(60deg, #eee 0, #eee 1px, transparent 1px, transparent 32px),
-                    repeating-linear-gradient(150deg, #eee 0, #eee 1px, transparent 1px, transparent 32px);
-                color: #000;
+                background-color: var(--bg-color);
+                background-image: /* 斜めのグリッドパターンを背景に設定 */
+                    repeating-linear-gradient(60deg, var(--grid-line) 0, var(--grid-line) 1px, transparent 1px, transparent 32px),
+                    repeating-linear-gradient(150deg, var(--grid-line) 0, var(--grid-line) 1px, transparent 1px, transparent 32px);
+                color: var(--text-color);
                 font-weight: 350;
                 font-display: swap; 
             }
@@ -40,11 +83,14 @@
             footer {
                 width: 100%;
                 padding: 2rem 0;
-                border-top: 1px solid #ccc;
-                background-color: #eee; margin: 0;
+                border-top: 1px solid var(--footer-border);
+                background-color: var(--footer-bg); margin: 0;
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                box-shadow: var(--footer-shadow);
             }
             hr {
-                border: #000 1px solid;
+                border: var(--text-color) 1px solid;
                 margin: 4rem 1rem;
             }
             h1 {
@@ -54,22 +100,22 @@
             }
             h1::after, h1::before { content: " ～ "; }
             a {
-                color: #005fc0;
+                color: var(--link-color);
             }
             
             /* --- カードコンテナの設定 (Gridで階層を浅く) --- */
             .container {
-                background-color: #ffffff1f;
+                background-color: var(--container-bg);
                 backdrop-filter: blur(4px);
                 -webkit-backdrop-filter: blur(4px);
-                color: #000;
+                color: var(--text-color);
                 font-weight: 350;
                 text-decoration: none;
                 border-radius: 1rem;
                 text-align: start;
                 padding: 0.5rem 0.5rem;
                 margin: 1rem 0;
-                box-shadow: 0 0 6px rgba(0,0,0,0.15), 0 0 4px rgba(0,0,0,0.25), inset 0 0 24px 16px rgba(255,255,255,1);
+                box-shadow: var(--container-shadow);
                 position: relative;
                 overflow: hidden;
                 overflow-wrap: anywhere;
@@ -93,7 +139,7 @@
             }
 
             .container picture img {
-                width: 100%; display: block; border-radius: 50%; height: auto; aspect-ratio: 1 / 1; background-color: #eee;
+                width: 100%; display: block; border-radius: 50%; height: auto; aspect-ratio: 1 / 1; background-color: var(--img-bg);
             }
 
             .container h2 {
@@ -101,7 +147,7 @@
                 font-weight: 350;
                 padding: 0 0 0 0.5rem;
                 margin: 2rem 0;
-                border-left: 2px solid #000;
+                border-left: 2px solid var(--text-color);
                 align-self: end;
             }
 
@@ -133,7 +179,7 @@
                 grid-area: bar;
                 width: calc(100% - 1rem);
                 height: 0.5rem;
-                background-color: #333;
+                background-color: var(--progress-bg);
                 border-radius: 0.25rem;
                 margin: 0.5rem auto;
                 box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
@@ -147,7 +193,7 @@
 
             .progress-text {
                 grid-area: txt;
-                font-size: 0.75rem; text-align: right; padding-right: 0.5rem; margin-top: -0.25rem; color: #555; min-height: 1.2em;
+                font-size: 0.75rem; text-align: right; padding-right: 0.5rem; margin-top: -0.25rem; color: var(--progress-text); min-height: 1.2em;
             }
 
             .no-js .progress-container, .no-js .progress-text {
@@ -161,6 +207,31 @@
             }
 
             .container:hover::after { width: 100%; }
+
+            /* --- テーマ切り替えボタン --- */
+            #theme-toggle {
+                position: fixed;
+                top: 1rem;
+                right: 1rem;
+                z-index: 1000;
+                padding: 0.5rem 1rem;
+                background-color: var(--container-bg);
+                color: var(--text-color);
+                border: 1px solid var(--text-color);
+                border-radius: 2rem;
+                font-family: inherit;
+                font-size: 0.9rem;
+                cursor: pointer;
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                transition: background-color 0.3s, color 0.3s;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            #theme-toggle:hover {
+                background-color: var(--text-color);
+                color: var(--bg-color);
+            }
 
             /* --- レスポンシブ設定 (モバイル) --- */
             @media (max-width: 576px) {
@@ -219,6 +290,9 @@
     </head>
     <body class="no-js">
         <script>document.body.classList.remove('no-js');</script>
+        
+        <button id="theme-toggle" aria-label="Toggle Theme">Dark</button>
+
         <header>
             <h1>Links</h1>
             <hr />
@@ -327,12 +401,12 @@
         </main>
         <footer>
             <a href="/">HOME</a>|<span>&copy; 2026- 風止渚</span><br />
-            <p style="color: #005fc0; text-decoration: underline; cursor: pointer; padding-bottom: 0; margin: 0 auto; width: fit-content;" onclick="alert('\u0063\u006F\u006E\u0074\u0061\u0063\u0074\u0040\u006B\u007A\u006E\u0067\u002E\u0066\u0035\u002E\u0073\u0069')">問い合わせ</p>
+            <p style="color: var(--link-color); text-decoration: underline; cursor: pointer; padding-bottom: 0; margin: 0 auto; width: fit-content;" onclick="alert('\u0063\u006F\u006E\u0074\u0061\u0063\u0074\u0040\u006B\u007A\u006E\u0067\u002E\u0066\u0035\u002E\u0073\u0069')">問い合わせ</p>
         </footer>
         <script>
             const followerData = {
-                'twitter-main': { current: 1500, goal: 2000 },
-                'twitter-sub': { current: 129, goal: 150 }
+                'twitter-main': { current: 1600, goal: 2000 },
+                'twitter-sub': { current: 135, goal: 150 }
             };
 
             window.addEventListener('DOMContentLoaded', () => {
@@ -348,6 +422,20 @@
                     
                     if (bar) bar.style.width = percent + '%';
                     if (text) text.textContent = `${data.current} / ${data.goal} followers`;
+                });
+
+                // --- ダークモード切り替え処理 ---
+                const themeToggle = document.getElementById('theme-toggle');
+                const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+                themeToggle.textContent = currentTheme === 'dark' ? 'Light' : 'Dark';
+
+                themeToggle.addEventListener('click', () => {
+                    let theme = document.documentElement.getAttribute('data-theme');
+                    theme = theme === 'dark' ? 'light' : 'dark';
+                    
+                    document.documentElement.setAttribute('data-theme', theme);
+                    localStorage.setItem('theme', theme);
+                    themeToggle.textContent = theme === 'dark' ? 'Light' : 'Dark';
                 });
             });
         </script>
