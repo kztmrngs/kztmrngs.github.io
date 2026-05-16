@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="風止渚のホームページ">
+        <meta name="author" content="風止渚">
+        <title>風止渚のホームページ</title>
+        <script>
+            (function() {
+                try {
+                    var theme = localStorage.getItem('theme');
+                    if (!theme) {
+                        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                            theme = 'dark';
+                        } else {
+                            theme = 'light';
+                        }
+                    }
+                    document.documentElement.setAttribute('data-theme', theme);
+                } catch (e) {
+                    // 無視して続行
+                }
+            })();
+        </script>
+        <style>
+            table {
+                max-width: 720px;
+                width: 30%;
+                table-layout: fixed;
+            }
+            .left  { width: 40%; }
+            .right { width: 60%; }
+        </style>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script src="/script.js" defer></script>
+    </head>
+    <body>
+        <header id="header-placeholder"></header>
+        <main>
+            <h1>About me.</h1>
+            <div style="display: flex;">
+                <div style="flex: 1; margin-right: 1rem;">
+                    <img src="./imgs/TwitterMainAccountImage.png" alt="アイコン画像"/>
+                    <p style="color: #808080; text-align: center;">アイコン画像</p>
+                </div>
+                <div style="flex: 8;">
+                    <p>はじめまして。私の名前は風止渚(かぜとまりなぎさ)です。</p>
+                    <p>高専生です。高専は情報科で情報やプログラミングのことを学んでいます。</p>
+                    <p>趣味はプログラミングで、Scratchをずっとしています。</p>
+                    <p>数学を勉強しており勉強した数学を使ったプロジェクトを作りたいと考えています。</p>
+                    <p>改行コードはCRLF派でラインフィードにキャリッジリターンを求めるな!!と主張しています。(UNIX哲学に反するUNIXのLFの挙動ほんとよくない...)</p>
+                    <p>メインエディタはVSCodeでテーマは大体monokaiに設定していますが気分で色々変えています。</p>
+                    <p>セマンティックバージョニング過激派です。ぜひ皆さんセマンティックバージョニングしましょう。(なお当人はバージョニングすること自体をよく忘れる...)</p>
+                    <p>x86信者です。armは主流になりません。risc-vも主流になりません。</p>
+                </div>
+            </div>
+            <h2>Spec</h2>
+            <p>私の基本スペックです。</p>
+            <table>
+                <thead>
+                    <tr><th class="left">項目</th><th class="right">値</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>名前</td>         <td>風止渚やまくろやnewline_CRLFなど...</td></tr>
+                    <tr><td>性別</td>         <td>男</td></tr>
+                    <tr><td>誕生日</td>       <td>2月16日</td></tr>
+                    <tr><td>年齢</td>         <td>16歳</td></tr>
+                    <tr><td>住まい</td>       <td>関東</td></tr>
+                    <tr><td>身分</td>         <td>学生(高専生)</td></tr>
+                    <tr><td>好きな食べ物</td> <td>からあげ(冷凍は嫌い)</td></tr>
+                    <tr><td>好きな色</td>     <td>黄色</td></tr>
+                    <tr><td>好きな動物</td>   <td>猫</td></tr>
+                    <tr><td>好きな言語</td>   <td>Scratch</td></tr>
+                </tbody>
+            </table>
+            <h2>Skill</h2>
+            <p>私には次のようなスキルがあります。(★0~★5で0は全く出来ない、3はそこそこできる。5はかなりできる。)
+            <table>
+                <thead>
+                    <tr><th class="left">言語</th><th class="right">レベル</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Scratch</td> <td>★★★★★</td></tr>
+                    <tr><td>HTML</td>    <td>★★★★☆</td></tr>
+                    <tr><td>CSS</td>     <td>★★★☆☆</td></tr>
+                    <tr><td>JS</td>      <td>★★☆☆☆</td></tr>
+                    <tr><td>C言語</td>   <td>★★☆☆☆</td></tr>
+                    <tr><td>C++</td>     <td>★☆☆☆☆</td></tr>
+                    <tr><td>Python</td>  <td>★☆☆☆☆</td></tr>
+                    <tr><td>C#</td>      <td>☆☆☆☆☆</td></tr>
+                    <tr><td>Java</td>    <td>☆☆☆☆☆</td></tr>
+                </tbody>
+            </table>
+            <h2>Links</h2>
+            <p>私のSNSなどのリンクです。</p>
+            <ul>
+                <li><a href="https://twitter.com/makur0gaku" target="_blank">Twitter(メイン)</a></li>
+                <li><a href="https://twitter.com/newline_CRLF" target="_blank">Twitter(サブ)</a></li>
+                <li><a href="https://github.com/kztmrngs" target="_blank">GitHub</a></li>
+                <li><a href="https://marshmallow-qa.com/151bw1566v9i0zt?t=wxQW5T&utm_medium=https://kzng.f5.si/about.html&utm_source=promotion" target="_blank">マシュマロ</a></li>
+                <li><a href="https://scratch.mit.edu/users/ankouakaisikairoka/" target="_blank">Scratch</a></li>
+                <li><a href="https://discord.gg/3vxcQTn7Z5" target="_blank">Discordサーバー</a></li>
+                <li><a href="https://discordapp.com/users/1361640482936983563" target="_blank">Discord個人</a></li>
+                <li><a href="https://www.youtube.com/channel/UCB3QMt3F55zCn2GFH4OKmgQ" target="_blank">Youtube</a></li>
+                <li><a href="/" target="_blank">風止渚のホームページ</a></li>
+            </ul>
+        </main>
+        <footer id="footer-placeholder"></footer>
+    </body>
+</html>
