@@ -61,7 +61,7 @@ function initTheme() {
 
 // --- コードブロックのインデント調整処理 ---
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('pre.code-block').forEach(element => {
+    document.querySelectorAll('pre').forEach(element => {
         const text = element.textContent;
         let lines = text.split('\n');
 
