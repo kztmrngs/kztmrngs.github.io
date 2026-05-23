@@ -26,8 +26,24 @@
         <style>
             table {
                 max-width: 720px;
-                width: 40%;
+                width: 100%;
                 table-layout: fixed;
+            }
+            #profile-container {
+                display: flex;
+                gap: 1rem;
+                width: 100%;
+            }
+            #icon {
+                width: 180px;
+            }
+            #profile {
+                flex: 1;
+            }
+            @media (max-width: 600px) {
+                #profile-container {
+                    flex-direction: column;
+                }
             }
             .left  { width: 40%; }
             .right { width: 60%; }
@@ -42,12 +58,12 @@
         <header id="header-placeholder"></header>
         <main>
             <h1>About me.</h1>
-            <div style="display: flex;">
-                <div style="flex: 1; margin-right: 1rem;">
+            <div id="profile-container">
+                <div id="icon">
                     <img src="./imgs/TwitterMainAccountImage.png" alt="アイコン画像"/>
                     <p style="color: #808080; text-align: center;">アイコン画像</p>
                 </div>
-                <div style="flex: 8;">
+                <div id="profile">
                     <p>はじめまして。私の名前は風止渚(かぜとまりなぎさ)です。</p>
                     <p>高専生です。高専は情報科で情報やプログラミングのことを学んでいます。</p>
                     <p>趣味はプログラミングで、Scratchをずっとしています。</p>
