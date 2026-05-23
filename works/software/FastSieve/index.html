@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastSieve - 超高速なエラトステネスの篩の実装</title>
+    <style>
+        body {
+            font-family: "Noto Sans JP", sans-serif;
+            line-height: 1.6;
+            color: #000;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        h3 {
+            font-size: 1.25em;
+        }
+
+        h4 {
+            font-size: 1.1em;
+        }
+
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            background-color: #f0f0f0;
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            border-radius: 3px;
+        }
+
+        pre {
+            background-color: #2d2d2d;
+            color: #f1f1f1;
+            padding: 16px;
+            overflow: auto;
+            border-radius: 6px;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+            font-size: 100%;
+            color: inherit;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        ul,
+        ol {
+            padding-left: 2em;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            display: block;
+            overflow-x: auto;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: 600;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #eaecef;
+            margin: 24px 0;
+        }
+
+        a {
+            color: #007fff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>FastSieve</h1>
+    <p>超高速なエラトステネスの篩の実装です。</p>
+
+    <h2>アルゴリズム詳細</h2>
+    <p>このプログラムは、エラトステネスの篩に複数の高度な最適化手法を組み合わせることで、極めて高いパフォーマンスを実現しています。以下に、主要な最適化技術を詳述します。</p>
+
+    <h3>1. ホイール法 (Wheel Factorization)</h3>
+    <ul>
+        <li><strong>原理</strong>: 素数2, 3, 5の倍数をあらかじめ篩の対象から除外する最適化手法です。この3つの素数の最小公倍数は30であるため、「<code>wheel30</code>」と呼ばれます。</li>
+        <li><strong>詳細</strong>: 30までの自然数のうち、2, 3, 5のいずれの倍数でもない数は <code>{1, 7, 11, 13, 17, 19, 23, 29}</code> の8個しか存在しません。これは、任意の整数 <code>30k</code> にこの8つの数を加えた数のみが素数候補となることを意味します（1は素数ではないため、実質的には7以上の素数候補がこのパターンに従います）。</li>
+        <li><strong>効果</strong>: この手法により、篩うべき数の母集団が元の数の約 <code>8/30</code> (≈ 26.7%) にまで劇的に減少し、計算量が大幅に削減されます。また、候補が30ごとに8個という周期性を持つため、1バイト（8ビット）で30の範囲をマッピングするビットパッキングと極めて相性が良くなります。</li>
+    </ul>
+
+    <h3>2. ビットパッキング (Bit Packing)</h3>
+    <ul>
+        <li><strong>原理</strong>: 篩の状態を管理する配列において、1つの素数候補を1ビットに対応させることで、メモリ使用量を極限まで削減する手法です。</li>
+        <li><strong>詳細</strong>: <code>std::vector&lt;unsigned char&gt;</code> (C++では <code>char</code> は1バイト=8ビット) を使い、各ビットをフラグとして利用します。ホイール法によって選別された30ごとの8個の候補が、配列の1バイトに以下のようにマッピングされます。
+            <ul>
+                <li><code>sieve[k]</code> の0ビット目: <code>30k + 1</code></li>
+                <li><code>sieve[k]</code> の1ビット目: <code>30k + 7</code></li>
+                <li><code>sieve[k]</code> の2ビット目: <code>30k + 11</code></li>
+                <li>...</li>
+                <li><code>sieve[k]</code> の7ビット目: <code>30k + 29</code></li>
+            </ul>
+            ある数が素数でないと判明した場合、対応するビットを <code>1</code> から <code>0</code> に反転させます。
+        </li>
+        <li><strong>効果</strong>: メモリ使用量を単純な <code>bool</code> 配列と比較して1/8に圧縮します。これにより、CPUのキャッシュ（特にL1/L2キャッシュ）に格納できる範囲が8倍に広がり、キャッシュヒット率が大幅に向上します。メモリアクセスは計算処理において主要なボトルネックの一つであるため、このキャッシュ効率の改善は実行速度に絶大な効果をもたらします。</li>
+    </ul>
+
+    <h3>3. 区間篩 (Segmented Sieve)</h3>
+    <ul>
+        <li><strong>原理</strong>: 篩にかける巨大な数値範囲を、CPUのキャッシュサイズに収まるような小さな「セグメント」に分割し、セグメントごとに篩処理を完結させる手法です。</li>
+        <li><strong>詳細</strong>:
+            <ol>
+                <li><strong>ベース素数の計算</strong>: まず、篩いたい最大値 <code>N</code> の平方根 <code>√N</code> までの素数（ベース素数）を、比較的小さな篩（ベース篩）で全て求めます。なぜなら、<code>N</code> 以下の全ての合成数 <code>C</code> は、必ず <code>√N</code> 以下の素因数 <code>p</code> を持つからです。（もし全ての素因数が <code>&gt;√N</code> なら、その積は <code>N</code> を超えてしまうため）。</li>
+                <li><strong>セグメント処理</strong>: <code>√N</code> から <code>N</code> までの範囲を、<code>SEGMENT_SIZE</code> で定義された固定長の区間（セグメント）に分割します。そして、各セグメントを表す小さな篩配列をメモリ上に確保し、ベース素数を使ってそのセグメント内の合成数を篩い落とします。この処理を最後のセグメントまで繰り返します。</li>
+            </ol>
+        </li>
+        <li><strong>効果</strong>: セグメントのサイズをCPUのL2キャッシュ（数MB程度）に完全に収まるように設計することで、セグメント内の篩処理中に発生するメモリアクセスがほぼ全てキャッシュヒットするようになります。これにより、メインメモリへのアクセス頻度が劇的に減少し、メモリアクセスのレイテンシが隠蔽されるため、処理速度が飛躍的に向上します。この実装では、<code>SEGMENT_SIZE</code> は <code>256KB * 30</code> バイトに設定されており、多くの現代的CPUのL2/L3キャッシュサイズを意識した値となっています。</li>
+    </ul>
+
+    <h3>4. 事前計算テーブルによるループ最適化</h3>
+    <ul>
+        <li><strong>原理</strong>: 篩処理の最深部ループは、プログラム全体の実行時間の大半を占めます。このループ内の計算を極限まで単純化するため、複雑な計算パターンを事前に解析し、その結果を定数テーブルとしてコードに埋め込む手法です。</li>
+        <li><strong>詳細</strong>: ホイール法を適用した篩では、ある素数 <code>p = 30k+r1</code> の倍数 <code>p * q</code> (ここで <code>q = 30m+r2</code> も素数候補) を篩い落とす必要があります。この積 <code>p*q</code> がビット配列上のどのバイトのどのビットに対応するかを計算するのは、 <code>(p*q)/30</code> のような高コストな演算が必要となり、非常に非効率です。しかし、この計算結果のパターンを分析すると、<code>p</code> の系列 (<code>r1</code> の値) ごとに、<code>q</code> の8つの系列 (<code>r2</code>) との積のオフセットが、<code>k</code> (<code>=p/30</code>) に関する一次式で表せることが分かります。
+        この実装では、その一次式の定数項と係数を <code>offsetIdxConst</code> と <code>offsetIdxCoeff</code> というテーブルに事前計算しています。
+            <ul>
+                <li><code>offsetMod8</code>: <code>p*q</code> の積の剰余 (<code>%30</code>) が8つの候補のうちどれに対応するかのパターンを保持します。これにより、どのビットを <code>0</code> にすべきかが瞬時に分かります。</li>
+                <li><code>offsetIdxConst</code>, <code>offsetIdxCoeff</code>: ビットが含まれるバイトのインデックスを計算するためのオフセットです。<code>p</code> の系列と <code>k (=p/30)</code> が分かれば、8つのパターンのオフセットを <code>オフセット = offsetIdxConst + offsetIdxCoeff * k</code> という極めて単純な計算で求めることができます。</li>
+            </ul>
+        </li>
+        <li><strong>効果</strong>: 最も実行回数の多い篩い落としのループから、高コストな剰余演算や除算を完全に排除します。ループ内はテーブル参照、加算、乗算、ビット演算といったCPUが得意とする単純な命令のみで構成されることになります。これにより、CPUの命令パイプラインが効率的に動作し、スーパースカラー実行も促進されるため、驚異的なパフォーマンス向上を実現しています。これは、この実装における最も重要なコア最適化です。</li>
+    </ul>
+
+    <h2>使い方</h2>
+
+    <h3>ビルド</h3>
+    <pre><code>g++ -o FastSieve -O3 -march=native src/sieve.cpp</code></pre>
+    <p>ベンチマーク版をビルドする場合:</p>
+    <pre><code>g++ -o SieveBench -O3 -march=native src/sieve_bench.cpp</code></pre>
+    <p><code>-O3</code> と <code>-march=native</code> をつけることで、お使いのCPUに合わせた最適なコードが生成され、最高のパフォーマンスが期待できます。</p>
+
+    <h3>実行方法</h3>
+
+    <h4>2からNまでの素数を列挙する</h4>
+    <pre><code>./FastSieve &lt;N&gt;</code></pre>
+    <p><strong>例:</strong></p>
+    <pre><code>./FastSieve 1000000000</code></pre>
+    <p>実行後、見つかった素数の個数と処理時間が表示されます。</p>
+
+    <h4>MからNまでの素数を列挙する</h4>
+    <pre><code>./FastSieve &lt;M&gt; &lt;N&gt;</code></pre>
+    <p><strong>例:</strong></p>
+    <pre><code>./FastSieve 1000000000 2000000000</code></pre>
+    <p>実行後、範囲内で見つかった素数の個数と処理時間が表示されます。</p>
+
+    <p><strong>注:</strong> ベンチマーク版 (<code>SieveBench</code>) も同様の引数で実行できます。こちらは素数リストをメモリに保持せず、個数のみをカウントするため、より高速に動作しメモリ使用量も少ないです。</p>
+</body>
+</html>
