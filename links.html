@@ -94,11 +94,19 @@
                 margin: 4rem 1rem;
             }
             h1 {
-                font-family: "Playwrite CU", cursive;
+                display: flex;
                 font-weight: 350;
-                margin: 4rem 0;
+                margin: 0 0;
+                justify-content: center;
+                align-items: center;
             }
-            h1::after, h1::before { content: " ～ "; }
+            h1::after, h1::before {
+                content: "";
+                flex: 1;
+                height: 0.2rem;
+                background-color: var(--text-color);
+                margin: 0 2rem;
+            }
             a {
                 color: var(--link-color);
             }
@@ -139,7 +147,12 @@
             }
 
             .container picture img {
-                width: 100%; display: block; border-radius: 50%; height: auto; aspect-ratio: 1 / 1; background-color: var(--img-bg);
+                width: 100%;
+                display: block;
+                border-radius: 50%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                background-color: var(--img-bg);
             }
 
             .container h2 {
@@ -207,6 +220,54 @@
             }
 
             .container:hover::after { width: 100%; }
+            
+            /* --- タイトルコンテナの設定 --- */
+            .title-container {
+                /* ボックスをコンテナと共通に */
+                background-color: var(--container-bg);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                color: var(--text-color);
+                font-weight: 350;
+                text-decoration: none;
+                border-radius: 1rem;
+                text-align: start;
+                padding: 1.5rem 0.5rem 1rem 0.5rem;
+                margin: 1rem 0;
+                box-shadow: var(--container-shadow);
+            }
+            .title-container picture {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 0 1rem 0;
+            }
+            .title-container picture img {
+                border-radius: 50%;
+                width: 100%;
+                max-width: 160px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                background-color: var(--img-bg);
+                outline: 0.2rem solid var(--text-color); 
+                outline-offset: 0.6rem;
+            }
+            .title-container picture::after, .title-container picture::before {
+                content: '';
+                width: 2rem;
+                height: 0.2rem;
+                background-color: var(--text-color);
+                margin: 0 2rem;
+            }
+            .title-container h2 {
+                text-align: center;
+                font-weight: 350;
+                margin: 1rem 0;
+            }
+            .title-container p {
+                width: fit-content;
+                margin: 0 auto;
+            }
 
             /* --- テーマ切り替えボタン --- */
             #theme-toggle {
@@ -284,8 +345,8 @@
                 }
             }
         </style>
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@350&family=Playwrite+CU:wght@350&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@350&family=Playwrite+CU:wght@350&display=swap"></noscript>
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@350&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@350&display=swap"></noscript>
         <title>links - 風止渚のホームページ</title>
     </head>
     <body class="no-js">
@@ -294,8 +355,19 @@
         <button id="theme-toggle" aria-label="Toggle Theme">Dark</button>
 
         <header>
-            <h1>Links</h1>
-            <hr />
+            <div class="title-container">
+                <picture><!-- 一旦ツイッタのやつで代替-->
+                    <source srcset="imgs/TwitterMainAccountImage.webp" type="image/webp">
+                    <img src="imgs/TwitterMainAccountImage.png" alt="風止渚のアイコン" width="160" height="160" fetchpriority="high">
+                </picture>
+                <h2>風止 渚</h2>
+                <p>16歳の高専生です。高専は情報科で情報やプログラミングのことを学んでいます。<br />
+                    趣味はプログラミングで、Scratchをずっとしています。<br />
+                    その他画像エンコードや動画エンコードをしてたりAIを使っていろいろしています。<br />
+                    Scratchで何かしらの最先端を目指してたりしています。<br />
+                    いつかは研究者になりたいと思っています。</p>
+            </div>
+            <h1 style="text-align: center;">Links</h1>
         </header>
         <main>
             <!-- 1. Twitter メイン (アイコンあり＋プログレスバー) -->
@@ -421,8 +493,8 @@
         </footer>
         <script>
             const followerData = {
-                'twitter-main': { current: 1650, goal: 2000 },
-                'twitter-sub': { current: 150, goal: 150 }
+                'twitter-main': { current: 1700, goal: 2000 },
+                'twitter-sub': { current: 165, goal: 150 }
             };
 
             window.addEventListener('DOMContentLoaded', () => {
