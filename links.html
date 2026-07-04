@@ -23,6 +23,10 @@
         </script>
 
         <style>
+            @font-face {
+                font-family: "Local Noto Sans JP";
+                src: local("Noto Sans JP");
+            }
             /* --- カラースキーム定義 --- */
             :root {
                 --bg-color: #fdfdfd;
@@ -57,7 +61,7 @@
                 font-size: clamp(12.7px, 3.5vw, 16px);
             }
             body {
-                font-family: "Noto Sans JP", sans-serif;
+                font-family: "Local Noto Sans JP", "Noto Sans JP", sans-serif;
                 display: grid; /* flexからgridに変更 */
                 grid-template-rows: auto 1fr auto; /* ヘッダー、メイン、フッターの高さ制御 */
                 min-height: 100vh;
