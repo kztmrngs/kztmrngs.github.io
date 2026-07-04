@@ -18,6 +18,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/style.css">
         <script src="/script.js" defer></script>
+        <link rel="icon" href="/favicon.ico" sizes="32x32">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     </head>
     <body>
         <noscript><h1 style="color: #f00;">JavaScriptが無効のため、正常に表示できません。</h1></noscript>
